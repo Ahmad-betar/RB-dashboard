@@ -9,7 +9,7 @@ import {
 
 export const getProductsQuery = async (params: any) => {
   const queryResults = useQuery({
-    queryKey: ["get-product"],
+    queryKey: ["get-products"],
     queryFn: async () => {
       const data = await get_products({});
 
