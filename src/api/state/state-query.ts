@@ -1,5 +1,5 @@
 import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
-import { add_state, delete_state, get_states } from "./location-api";
+import { add_state, delete_state, get_states } from "./state-api";
 
 export const getStatesQuery = async (params: any) => {
   const queryResults = useQuery({

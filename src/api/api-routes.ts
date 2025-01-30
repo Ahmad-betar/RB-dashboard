@@ -8,7 +8,8 @@ export const API_ROUTES = {
   },
 
   productType: {
-    get: "/productTypes",
+    getParent: "/parentProductTypes",
+    getChildren: "/childrenProductTypes/",
     create: "/admin/productTypes",
     delete: "/admin/productTypes",
   },
@@ -26,7 +27,7 @@ export const API_ROUTES = {
       add: "/admin/governorate",
       delete: "/admin/governorate/",
     },
-    
+
     city: {
       getOne: "/cities/",
       add: "/admin/city",

@@ -1,49 +1,67 @@
-import logo from "../../public/vite.svg";
+import {
+  House,
+  Palette,
+  Plug,
+  Users,
+  Settings,
+  Archive,
+  Building2,
+  PackageSearch,
+  CircleDollarSign,
+} from "lucide-react";
 
 export const nav_links = [
   {
-    logo: logo,
+    logo: House, // Use the House icon for Home
     label: "Home",
     link: "/",
+    menu: false,
   },
   {
-    logo: logo,
-    label: "Posts",
-    link: "/",
+    logo: Archive, // Use the Book icon for Posts
+    label: "Products",
+    link: "/products",
+    menu: false,
   },
   {
-    logo: logo,
-    label: "Media",
-    link: "/",
+    logo: PackageSearch, // Use the MessageCircle icon for Comments
+    label: "Product Type",
+    link: "/product-type",
+    menu: false,
   },
   {
-    logo: logo,
-    label: "Comments",
-    link: "/",
+    label: "Location",
+    logo: Building2,
+    link: "/city",
+    menu: true,
+    menuItems: [
+      { label: "Governorates", logo: Building2, link: "/governorate" },
+      { label: "City", logo: Building2, link: "/city" },
+      { label: "State", logo: Building2, link: "/state" },
+    ],
   },
   {
-    logo: logo,
-    label: "Appearance",
-    link: "/",
+    logo: CircleDollarSign,
+    label: "Coupon",
+    link: "/coupon",
+    menu: false,
   },
   {
-    logo: logo,
+    logo: Plug,
     label: "Plugins",
-    link: "/",
+    link: "/plugins",
+    menu: false,
   },
   {
-    logo: logo,
+    logo: Users,
     label: "Users",
-    link: "/",
+    link: "/users",
+    menu: false,
   },
   {
-    logo: logo,
+    logo: Settings,
     label: "Settings",
-    link: "/",
-  },
-  {
-    logo: logo,
-    label: "Tools",
-    link: "/",
+    link: "/settings",
+    menu: false,
   },
 ];
