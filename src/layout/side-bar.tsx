@@ -20,13 +20,8 @@ import { Menu } from "lucide-react";
 const SideNav = () => {
   return (
     <Drawer direction="left">
-      <DrawerTrigger className="w-fit">
-        <Button
-          className=" p-2 rounded-full shadow-none w-10 h-10"
-          variant={"outline"}
-        >
-          <Menu />
-        </Button>
+      <DrawerTrigger className="w-fit p-2 rounded-full shadow-none h-10">
+        <Menu />
       </DrawerTrigger>
 
       <DrawerContent

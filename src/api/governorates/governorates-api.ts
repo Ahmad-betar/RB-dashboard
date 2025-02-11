@@ -1,8 +1,9 @@
 import { API_ROUTES } from "../api-routes";
 import { API_BASE_URL, axiosInstance } from "../axios";
+import { addGovernoratesType } from "./type";
 
 export const get_governorates = async (id: string) => {
-  const { data } = await axiosInstance.get(
+  const { data } = await axiosInstance.get<addGovernoratesType[]>(
     API_BASE_URL + API_ROUTES.location.governorates.getOne + id
   );
 

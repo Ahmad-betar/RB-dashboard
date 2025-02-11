@@ -1,11 +1,17 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { add_coupon, delete_coupon, get_coupons } from "./coupon-api";
+import { getCouponsType } from "./type";
 
-export const getCouponsQuery = async (params: any) => {
-  const queryResults = useQuery({
+export const getCouponsQuery = () => {
+  const queryResults = useQuery<getCouponsType>({
     queryKey: ["coupons"],
     queryFn: async () => {
-      const data = await get_coupons(params);
+      const data = await get_coupons();
 
       return data;
     },
@@ -15,19 +21,29 @@ export const getCouponsQuery = async (params: any) => {
   return queryResults;
 };
 
-export const addCouponQuery = async (params: any) => {
+export const addCouponQuery = () => {
+  const queryClient = useQueryClient();
+
   const queryResults = useMutation({
     mutationKey: ["add-coupon"],
     mutationFn: add_coupon,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["coupons"] });
+    },
   });
 
   return queryResults;
 };
 
-export const deleteCouponQuery = async (id: string) => {
+export const deleteCouponQuery = () => {
+  const queryClient = useQueryClient();
+
   const queryResults = useMutation({
     mutationKey: ["delete-coupon"],
-    mutationFn: () => delete_coupon(id),
+    mutationFn: delete_coupon,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["coupons"] });
+    },
   });
 
   return queryResults;

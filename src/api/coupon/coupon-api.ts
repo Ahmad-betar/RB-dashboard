@@ -1,10 +1,9 @@
 import { API_ROUTES } from "../api-routes";
 import { API_BASE_URL, axiosInstance } from "../axios";
 
-export const get_coupons = async (params: any) => {
+export const get_coupons = async () => {
   const { data } = await axiosInstance.get(
-    API_BASE_URL + API_ROUTES.coupon.get,
-    { params }
+    API_BASE_URL + API_ROUTES.coupon.get
   );
 
   return data;

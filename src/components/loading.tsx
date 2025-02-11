@@ -19,7 +19,7 @@ export default function LoadingSpinner({
   };
 
   const colorClasses = {
-    primary: "text-secondary",
+    primary: "text-primary",
     secondary: "text-secondary",
     white: "text-white",
   };
@@ -27,7 +27,7 @@ export default function LoadingSpinner({
   return (
     <div
       className={cn(
-        "flex items-center justify-center h-screen dark:bg-background",
+        "flex items-center justify-center h-fit dark:bg-background",
         className
       )}
     >

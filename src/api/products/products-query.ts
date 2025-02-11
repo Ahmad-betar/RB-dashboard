@@ -7,7 +7,7 @@ import {
   get_products,
 } from "./products-api";
 
-export const getProductsQuery = async (params: any) => {
+export const getProductsQuery = (params: any) => {
   const queryResults = useQuery({
     queryKey: ["get-products"],
     queryFn: async () => {
@@ -21,7 +21,7 @@ export const getProductsQuery = async (params: any) => {
   return queryResults;
 };
 
-export const getOneProductsQuery = async (params: any) => {
+export const getOneProductsQuery = (params: any) => {
   const queryResults = useQuery({
     queryKey: ["get-product"],
     queryFn: async () => {
@@ -35,7 +35,7 @@ export const getOneProductsQuery = async (params: any) => {
   return queryResults;
 };
 
-export const addProductsQuery = async (params: any) => {
+export const addProductsQuery = (params: any) => {
   const queryResults = useMutation({
     mutationKey: ["add-products"],
     mutationFn: add_products,
@@ -44,7 +44,7 @@ export const addProductsQuery = async (params: any) => {
   return queryResults;
 };
 
-export const editProductsQuery = async (params: any) => {
+export const editProductsQuery = (params: any) => {
   const queryResults = useMutation({
     mutationKey: ["edit-products"],
     mutationFn: edit_products,
@@ -53,7 +53,7 @@ export const editProductsQuery = async (params: any) => {
   return queryResults;
 };
 
-export const deleteProductsQuery = async (params: any) => {
+export const deleteProductsQuery = (params: any) => {
   const queryResults = useMutation({
     mutationKey: ["delete-products"],
     mutationFn: delete_products,
