@@ -1,114 +1,72 @@
-import { useForm, Controller } from "react-hook-form";
-import { getProductParams } from "@/api/products/type";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import TextField from "@/components/TextField";
+import RHFSelect from "@/components/rhf-select";
+import { Label } from "@/components/ui/label";
+import { useFormContext } from "react-hook-form";
 
 interface ProductFiltersProps {
-  control: any;
   productTypes: { _id: string; name: string }[];
-  onSubmit: (data: getProductParams) => void;
 }
 
-const ProductFilters = ({
-  control,
-  productTypes,
-  onSubmit,
-}: ProductFiltersProps) => {
-  const { handleSubmit } = useForm<getProductParams>();
-
+const ProductFilters = ({ productTypes }: ProductFiltersProps) => {
+  const { control, setValue } = useFormContext();
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Filters</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          <div>
-            <Label>Search</Label>
-            <Controller
-              name="search"
-              control={control}
-              render={({ field }) => (
-                <Input {...field} placeholder="Search products" />
-              )}
-            />
-          </div>
-          <div>
-            <Label>Sort By</Label>
-            <Controller
-              name="sort"
-              control={control}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select sort" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="name:asc">Ascending</SelectItem>
-                    <SelectItem value="name:desc">Descending</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-          </div>
-          <div>
-            <Label>Product Type</Label>
-            <Controller
-              name="productType"
-              control={control}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {productTypes.map((type) => (
-                      <SelectItem key={type._id} value={type._id}>
-                        {type.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
-          </div>
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Filters</AccordionTrigger>
+        <AccordionContent className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <TextField name="search" control={control} label="Search" />
+
+          <RHFSelect
+            control={control}
+            name="sort"
+            label="Sort By"
+            items={[
+              { label: "Ascending", value: "name:asc" },
+              { label: "Descending", value: "name:desc" },
+            ]}
+            onValueChange={(value) => setValue("sort", value)}
+          />
+
+          <RHFSelect
+            control={control}
+            name="productType"
+            label="Product Type"
+            items={productTypes.map(({ _id, name }) => ({
+              label: name,
+              value: _id,
+            }))}
+            onValueChange={(value) => setValue("productType", value)}
+          />
+
           <div>
             <Label>Price Range</Label>
-            <div className="flex gap-2">
-              <Controller
+            <div className="flex mt-4 gap-2">
+              <TextField
+                control={control}
                 name="minPrice"
-                control={control}
-                render={({ field }) => (
-                  <Input {...field} type="number" placeholder="Min" />
-                )}
+                label=""
+                type="number"
+                placeholder="min Price"
               />
-              <Controller
-                name="maxPrice"
+
+              <TextField
                 control={control}
-                render={({ field }) => (
-                  <Input {...field} type="number" placeholder="Max" />
-                )}
+                name="maxPrice"
+                label=""
+                placeholder="max price"
+                type="number"
               />
             </div>
           </div>
-          <Button type="submit" className="col-span-full w-fit ml-auto">
-            Apply Filters
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
   );
 };
 

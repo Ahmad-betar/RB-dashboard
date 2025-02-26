@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-interface ProductPaginationProps {
+interface PaginationProps {
   page: number;
   totalPages: number;
   hasNextPage: boolean;
@@ -8,13 +8,13 @@ interface ProductPaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const ProductPagination = ({
+const RHFPagination = ({
   page,
   totalPages,
   hasNextPage,
   hasPreviousPage,
   onPageChange,
-}: ProductPaginationProps) => {
+}: PaginationProps) => {
   return (
     <div className="flex justify-between items-center mt-6">
       <Button
@@ -38,4 +38,4 @@ const ProductPagination = ({
   );
 };
 
-export default ProductPagination;
+export default RHFPagination;

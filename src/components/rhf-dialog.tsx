@@ -1,12 +1,6 @@
 import { ReactNode } from "react";
-import {
-  Dialog,
-  DialogContent,
-  //   DialogDescription,
-  //   DialogHeader,
-  //   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "./ui/button";
 
 const RhfDialog = ({
   content,
@@ -17,8 +11,14 @@ const RhfDialog = ({
 }) => {
   return (
     <Dialog>
-      <DialogTrigger>{trigger}</DialogTrigger>
-      <DialogContent className="flex justify-center h-[50vh]">{content}</DialogContent>
+      <DialogTrigger>
+        <Button variant={"outline"} className="p-0 w-10 h-10">
+          {trigger}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="flex justify-center h-[50vh]">
+        {content}
+      </DialogContent>
     </Dialog>
   );
 };

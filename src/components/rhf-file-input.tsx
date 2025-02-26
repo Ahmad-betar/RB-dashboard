@@ -9,15 +9,14 @@ import {
   uploadImageQuery,
   uploadVideoQuery,
 } from "@/api/uplaod-file.ts/uplaod-file";
-// import { API_BASE_URL } from "@/api/axios";
 import LoadingSpinner from "./loading";
+import { API_BASE_URL } from "@/api/axios";
 
 interface RHFInputFileProps extends InputProps {
   name: string;
   Icon: ReactNode;
   id: string;
   label?: string;
-  //   keyId: number;
   type: "image" | "audio" | "video";
 }
 
@@ -26,7 +25,6 @@ const RHFIileInput = ({
   id,
   name,
   label,
-  //   keyId,
   type,
   ...props
 }: RHFInputFileProps) => {
@@ -60,7 +58,13 @@ const RHFIileInput = ({
     }
   };
 
+  const removeFile = () => {
+    setValue(name, null); // Set the value to null or undefined to remove the file
+  };
+
   if (file) {
+    const imageUrl = API_BASE_URL + file;
+
     return (
       <div
         className={cn("flex flex-col w-full gap-4 justify-between md:w-fit")}
@@ -69,13 +73,14 @@ const RHFIileInput = ({
         <Button
           type="button"
           variant={"outline"}
-          onClick={() => {
-            setValue(name, undefined);
-            //   update(keyId, undefined);
+          style={{
+            backgroundImage: `url('${imageUrl}')`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
+          onClick={removeFile} // Use the removeFile function here
         >
-          {/* <img src={API_BASE_URL + watch(name)} /> */}
-          <X />
+          <X className="stroke-black" />
         </Button>
       </div>
     );
@@ -98,25 +103,20 @@ const RHFIileInput = ({
             >
               {isAddingImage || isAddingVideo ? <LoadingSpinner /> : Icon}
               <Input
-                // required
                 id={id}
                 type="file"
                 accept={type === "video" ? "video/*" : "image/*"}
                 className="hidden"
                 name={name}
                 ref={ref}
-                // value={value}
                 onChange={changeHandler}
                 disabled={isAddingImage || isAddingVideo}
-                // {...field}
-                // onChange={onChange}
                 {...props}
               />
             </Label>
           </div>
         )}
       />
-      {/* <DevTool control={control} /> */}
     </>
   );
 };

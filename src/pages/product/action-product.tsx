@@ -45,19 +45,27 @@ const ActionProduct = () => {
     });
 
   const submitHandler = (data: addProductForm) => {
+    const imagesUrls = data.imagesUrls
+      .filter(({ image }) => image !== null)
+      .map(({ image }) => image);
+
+    const videosUrls = data.videosUrls
+      .filter(({ video }) => video !== null)
+      .map(({ video }) => video);
+
     id
       ? edit({
           id,
           params: {
             ...data,
-            imagesUrls: data.imagesUrls.map(({ image }) => image ?? undefined),
-            videosUrls: data.videosUrls.map(({ video }) => video ?? undefined),
+            imagesUrls,
+            videosUrls,
           },
         })
       : add({
           ...data,
-          imagesUrls: data.imagesUrls.map(({ image }) => image ?? undefined),
-          videosUrls: data.videosUrls.map(({ video }) => video ?? undefined),
+          imagesUrls,
+          videosUrls,
         });
   };
 
@@ -132,7 +140,6 @@ const ActionProduct = () => {
               label: name,
               value: _id,
             })) ?? []
-            // []
           }
           placeholder="Enter Product Type"
           label="Product Type"

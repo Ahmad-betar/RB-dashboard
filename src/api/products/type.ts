@@ -57,6 +57,6 @@ export interface addProductForm extends addProduct {
 }
 
 export interface addProductType extends addProduct {
-  imagesUrls: (string | undefined)[];
-  videosUrls: (string | undefined)[];
+  imagesUrls: (string | undefined|null)[];
+  videosUrls: (string | undefined | null)[];
 }

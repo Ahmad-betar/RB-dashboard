@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Pen, Video } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import DeleteDialog from "@/components/delete-dialog";
 import { ProductType } from "@/api/products/type";
 import { API_BASE_URL } from "@/api/axios";
+import RhfDialog from "@/components/rhf-dialog";
 
 interface ProductCardProps {
   product: ProductType;
@@ -26,7 +26,6 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">{product.title}</CardTitle>
-
         </div>
         <p className="text-sm text-muted-foreground mt-2">
           {product.description}
@@ -43,6 +42,46 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
             {product.productType.name}
           </p>
         </div>
+
+        {/* Images Dialog */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {product.imagesUrls.map((imageUrl, index) => (
+            <RhfDialog
+              key={index}
+              trigger={
+                <img
+                  src={`${API_BASE_URL}${imageUrl}`}
+                  className="w-full h-full object-cover rounded-sm"
+                />
+              }
+              content={
+                <img
+                  src={`${API_BASE_URL}${imageUrl}`}
+                  alt={`Image ${index + 1}`}
+                  className="w-full h-full object-contain rounded-lg"
+                />
+              }
+            />
+          ))}
+        </div>
+
+        {/* Videos Dialog */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {product.videosUrls.map((videoUrl, index) => (
+            <RhfDialog
+              key={index}
+              trigger={<Video className="w-10 h-10" />}
+              content={
+                <video controls className="w-full h-full rounded-lg">
+                  <source src={`${API_BASE_URL}${videoUrl}`} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              }
+            />
+          ))}
+        </div>
+
+        {/* Edit and Delete Buttons */}
         <div className="mt-4 flex justify-end gap-2">
           <Link to={`/action-product/${product._id}`}>
             <Button variant="outline" size="icon">
