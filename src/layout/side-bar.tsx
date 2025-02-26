@@ -1,20 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+// import { useState } from "react";
 import { nav_links } from "./nav-links";
 import { Link } from "react-router-dom";
 import logout from "@/assets/log-out.svg";
 import moon from "@/assets/moon.svg";
 import main from "@/assets/react.svg";
+// import {
+//   Menubar,
+//   MenubarContent,
+//   MenubarItem,
+//   MenubarMenu,
+//   MenubarTrigger,
+// } from "@/components/ui/menubar";
 import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Menu } from "lucide-react";
 
 const SideNav = () => {
@@ -33,10 +38,10 @@ const SideNav = () => {
 
         <nav className="flex-grow">
           <ul className="">
-            {nav_links.map(
-              ({ label, link, logo: Logo, menu, menuItems }, index) => (
-                <div key={index}>
-                  {!menu && (
+            {nav_links.map(({ label, link, logo: Logo }, index) => (
+              <div key={index}>
+                {
+                  <DrawerClose asChild>
                     <Link to={link} key={index}>
                       <li className="flex items-center gap-2 p-2 my-2 hover:bg-gray-700">
                         <Logo className="w-5 h-5" />
@@ -44,9 +49,10 @@ const SideNav = () => {
                         {label}
                       </li>
                     </Link>
-                  )}
+                  </DrawerClose>
+                }
 
-                  {menu && (
+                {/* {menu && (
                     <Menubar className="bg-transparent border-none p-0">
                       <MenubarMenu>
                         <MenubarTrigger className="flex items-center w-full gap-2 p-2 my-2 hover:bg-gray-700">
@@ -70,10 +76,9 @@ const SideNav = () => {
                         </MenubarContent>
                       </MenubarMenu>
                     </Menubar>
-                  )}
-                </div>
-              )
-            )}
+                  )} */}
+              </div>
+            ))}
           </ul>
         </nav>
 

@@ -1,43 +1,50 @@
 import { API_ROUTES } from "../api-routes";
-import { API_BASE_URL, axiosInstance } from "../axios";
+import { axiosInstance } from "../axios";
+import { addProductType, getProductType, ProductType } from "./type";
 
-export const get_products = async (params: any) => {
-  const { data } = await axiosInstance.get(
-    API_BASE_URL + API_ROUTES.product.get,
+export const get_products = async () => {
+  const { data } = await axiosInstance.get<getProductType>(
+    API_ROUTES.product.get
+    // params
+  );
+
+  return data;
+};
+
+export const get_one_product = async (id: string) => {
+  const { data } = await axiosInstance.get<{ data: ProductType }>(
+    API_ROUTES.product.getOne + id
+  );
+
+  return data;
+};
+
+export const add_products = async (body: addProductType) => {
+  const { data } = await axiosInstance.post<addProductType>(
+    API_ROUTES.product.create,
+    body
+  );
+
+  return data;
+};
+
+export const edit_products = async ({
+  id,
+  params,
+}: {
+  id: string;
+  params: addProductType;
+}) => {
+  const { data } = await axiosInstance.put(
+    API_ROUTES.product.edit + id,
     params
   );
 
   return data;
 };
 
-export const get_one_product = async (params: any) => {
-  const { data } = await axiosInstance.get(
-    API_BASE_URL + API_ROUTES.product.getOne
-  );
-
-  return data;
-};
-
-export const add_products = async (params: any) => {
-  const { data } = await axiosInstance.post(
-    API_BASE_URL + API_ROUTES.product.create
-  );
-
-  return data;
-};
-
-export const edit_products = async (params: any) => {
-  const { data } = await axiosInstance.put(
-    API_BASE_URL + API_ROUTES.product.edit
-  );
-
-  return data;
-};
-
-export const delete_products = async (params: any) => {
-  const { data } = await axiosInstance.delete(
-    API_BASE_URL + API_ROUTES.product.delete
-  );
+export const delete_products = async (id: string) => {
+  const { data } = await axiosInstance.delete(API_ROUTES.product.delete + id);
 
   return data;
 };

@@ -1,4 +1,9 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   create_product_type,
   delete_product_type,
@@ -17,7 +22,7 @@ export const getParentProductTypesQuery = () => {
     placeholderData: keepPreviousData,
   });
 };
-export const useGetChildrenProductTypes = (parentId: string) => {
+export const getChildrenProductTypes = (parentId: string) => {
   return useQuery({
     queryKey: ["children-product-types", parentId],
     queryFn: async () => {
@@ -29,15 +34,28 @@ export const useGetChildrenProductTypes = (parentId: string) => {
     placeholderData: keepPreviousData,
   });
 };
-export const useCreateProductType = () => {
+export const createProductType = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["create-product-type"],
     mutationFn: create_product_type,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["parent-product-types"] });
+    },
   });
 };
-export const useDeleteProductType = () => {
+export const deleteProductType = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["delete-product-type"],
     mutationFn: delete_product_type,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["parent-product-types"],
+      });
+      queryClient.invalidateQueries({ queryKey: ["children-product-types"] });
+    },
   });
 };

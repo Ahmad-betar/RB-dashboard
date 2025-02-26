@@ -8,6 +8,7 @@ interface TextFieldProps extends InputProps {
   control: Control<any, any>;
   name: string;
   placeholder?: string;
+  labelOnRight?: boolean;
 }
 
 const TextField = ({
@@ -15,16 +16,28 @@ const TextField = ({
   name,
   label,
   placeholder,
+  labelOnRight,
   ...props
 }: TextFieldProps) => {
   return (
-    <div className={cn("flex flex-grow gap-4 !items-center w-full")}>
-      <Label className="font-semibold">{label}</Label>
+    <div
+      className={cn("flex flex-col flex-grow w-full", {
+        "flex-row items-center": labelOnRight,
+      })}
+    >
+      <Label className={cn("mb-4", { "mb-0 font-bold": labelOnRight })}>
+        {label}:
+      </Label>
       <Controller
-        control={control}
         name={name}
+        control={control}
         render={({ field }) => (
-          <Input {...field} placeholder={placeholder} {...props} />
+          <Input
+            placeholder={placeholder || ""}
+            className="mr-4"
+            {...field}
+            {...props}
+          />
         )}
       />
     </div>

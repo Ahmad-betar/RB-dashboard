@@ -3,6 +3,7 @@ import CardText from "@/components/card-text";
 import DeleteDialog from "@/components/delete-dialog";
 import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
+// import TextField from "@/components/TextField";
 import Title from "@/components/title";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -18,6 +19,8 @@ const Coupon = () => {
       <Title title="Coupon" />
 
       {/* <AddGovernorates /> */}
+
+      {/* <TextField name="search"/> */}
 
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
         {data?.data.length !== 0 &&
@@ -38,19 +41,20 @@ const Coupon = () => {
             }) => (
               <Card className="flex flex-col justify-between" key={_id}>
                 <CardContent className="flex flex-col gap-2 font-light p-4">
-                  <CardText title="Code: " value={code} />
-                  <CardText title="Discount: " value={discount} />
-                  <CardText title="DiscountType: " value={discountType} />
+                  <CardText title="Code " value={code} />
+                  <CardText title="Discount " value={discount} />
+                  <CardText title="DiscountType " value={discountType} />
                   <CardText
-                    title="ExpirationDate: "
+                    title="ExpirationDate "
                     value={expirationDate.toString()}
+                    breakLine
                   />
-                  <CardText title="MaxDiscount: " value={maxDiscount} />
-                  <CardText title="MinOrderAmount: " value={minOrderAmount} />
-                  <CardText title="UsedCount: " value={usedCount} />
-                  <CardText title="UsageLimit: " value={usageLimit} />
+                  <CardText title="MaxDiscount " value={maxDiscount} />
+                  <CardText title="MinOrderAmount " value={minOrderAmount} />
+                  <CardText title="UsedCount " value={usedCount} />
+                  <CardText title="UsageLimit " value={usageLimit} />
                   <CardText
-                    title="ValidFor: "
+                    title="ValidFor "
                     value={
                       <span className="flex gap-1 w-fit">
                         {validFor?.map(({ title }) => (
@@ -60,12 +64,16 @@ const Coupon = () => {
                     }
                   />
                   {creator !== null && (
-                    <CardText title="Creator name: " value={creator.name} />
+                    <CardText title="Creator name " value={creator.name} />
                   )}
                   {creator !== null && (
-                    <CardText title="Creator Email: " value={creator.email} />
+                    <CardText title="Creator Email " value={creator.email} />
                   )}
-                  <CardText title="CreatedAt: " value={createdAt.toString()} />
+                  <CardText
+                    title="CreatedAt "
+                    value={createdAt.toString()}
+                    breakLine
+                  />
                 </CardContent>
 
                 <CardFooter className="flex self-end justify-end gap-2">

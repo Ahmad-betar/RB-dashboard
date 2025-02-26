@@ -1,6 +1,6 @@
 import "./App.css";
-import Routes from "../Routes";
-import SideNav from "./layout/side-bar";
+import Routes from "../routes";
+// import SideNav from "./layout/side-bar";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "./layout/header";
 

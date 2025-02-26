@@ -1,28 +1,27 @@
 import {
   deleteProductType,
-  getParentProductTypesQuery,
+  getChildrenProductTypes,
 } from "@/api/product-type/product-type-query";
 import DeleteDialog from "@/components/delete-dialog";
 import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import AddProductType from "./add-product-type";
-import { Link } from "react-router-dom";
-import { buttonVariants } from "@/components/ui/button";
-import { PackageSearch } from "lucide-react";
+import { useLocation, useParams } from "react-router-dom";
 
-const ProductType = () => {
-  const { data, isLoading } = getParentProductTypesQuery();
+const ChildrenProductType = () => {
+  const { id } = useParams();
+  const { state } = useLocation();
+  const { data, isLoading } = getChildrenProductTypes(id!);
   const { mutate, isPending } = deleteProductType();
 
   if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex gap-8 flex-col justify-end">
-      <Title title="Product Type" />
+      <Title title={"Children Product Type: " + state} />
 
-      <AddProductType />
+      {/* <AddProductType /> */}
 
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
         {data?.productTypes.length !== 0 &&
@@ -33,14 +32,6 @@ const ProductType = () => {
               </CardContent>
 
               <CardFooter className="flex justify-end gap-2">
-                <Link
-                  to={_id}
-                  className={buttonVariants({ variant: "outline" })}
-                  state={name}
-                >
-                  <PackageSearch />
-                </Link>
-
                 <DeleteDialog
                   id={_id}
                   deleteFn={mutate}
@@ -55,4 +46,4 @@ const ProductType = () => {
   );
 };
 
-export default ProductType;
+export default ChildrenProductType;

@@ -1,10 +1,10 @@
 import { API_ROUTES } from "../api-routes";
-import { API_BASE_URL, axiosInstance } from "../axios";
+import { axiosInstance } from "../axios";
 import { addGovernoratesType } from "./type";
 
 export const get_governorates = async (id: string) => {
   const { data } = await axiosInstance.get<addGovernoratesType[]>(
-    API_BASE_URL + API_ROUTES.location.governorates.getOne + id
+    API_ROUTES.location.governorates.getOne + id
   );
 
   return data;
@@ -12,7 +12,7 @@ export const get_governorates = async (id: string) => {
 
 export const add_governorate = async (params: any) => {
   const { data } = await axiosInstance.post(
-    API_BASE_URL + API_ROUTES.location.governorates.add,
+    API_ROUTES.location.governorates.add,
     params
   );
 
@@ -21,7 +21,7 @@ export const add_governorate = async (params: any) => {
 
 export const delete_governorate = async (id: string) => {
   const { data } = await axiosInstance.delete(
-    API_BASE_URL + API_ROUTES.location.governorates.delete + id
+    API_ROUTES.location.governorates.delete + id
   );
 
   return data;

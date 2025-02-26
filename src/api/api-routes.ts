@@ -3,7 +3,7 @@ export const API_ROUTES = {
     get: "products",
     create: "admin/product",
     edit: "admin/product/",
-    delete: "api/product/",
+    delete: "admin/product/",
     getOne: "product/",
   },
 
@@ -11,7 +11,7 @@ export const API_ROUTES = {
     getParent: "parentProductTypes",
     getChildren: "childrenProductTypes/",
     create: "admin/productTypes",
-    delete: "admin/productTypes",
+    delete: "admin/productTypes/",
   },
 
   location: {
@@ -40,5 +40,10 @@ export const API_ROUTES = {
     get: "admin/coupons", //params
     add: "admin/coupon",
     delete: "admin/coupon/",
+  },
+
+  file: {
+    image: "admin/upload/image",
+    video: "admin/upload/video",
   },
 };

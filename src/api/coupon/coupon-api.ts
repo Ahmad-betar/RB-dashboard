@@ -1,9 +1,9 @@
 import { API_ROUTES } from "../api-routes";
-import { API_BASE_URL, axiosInstance } from "../axios";
+import { axiosInstance } from "../axios";
 
 export const get_coupons = async () => {
   const { data } = await axiosInstance.get(
-    API_BASE_URL + API_ROUTES.coupon.get
+    API_ROUTES.coupon.get
   );
 
   return data;
@@ -11,7 +11,7 @@ export const get_coupons = async () => {
 
 export const add_coupon = async (params: any) => {
   const { data } = await axiosInstance.post(
-    API_BASE_URL + API_ROUTES.coupon.add,
+    API_ROUTES.coupon.add,
     params
   );
 
@@ -20,7 +20,7 @@ export const add_coupon = async (params: any) => {
 
 export const delete_coupon = async (id: string) => {
   const { data } = await axiosInstance.delete(
-    API_BASE_URL + API_ROUTES.coupon.delete + id
+    API_ROUTES.coupon.delete + id
   );
 
   return data;

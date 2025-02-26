@@ -10,9 +10,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { UseMutateFunction, useQueryClient } from "@tanstack/react-query";
+import { UseMutateFunction } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
-import LoadingSpinner from "./loading";
+// import LoadingSpinner from "./loading";
 import { toast } from "sonner";
 
 const DeleteDialog = ({
@@ -55,12 +55,13 @@ const DeleteDialog = ({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
+            disabled={isLoading}
             className={buttonVariants({
               colorScheme: "error",
             })}
             onClick={handleDelete}
           >
-            {isLoading ? <LoadingSpinner /> : "Delete"}
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -1,0 +1,26 @@
+.multiple-value-text-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+._inputLabel_jafxa_3 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font: 600;
+}
+.multiple-value-text-input-item {
+  border-radius: 5px;
+  background-color: transparent !important ;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+p[role="list"] {
+  width: auto;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, auto);
+}
