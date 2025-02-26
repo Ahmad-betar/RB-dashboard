@@ -3,6 +3,8 @@ import { Suspense, lazy } from "react";
 import { Route, Routes as ReactRoutes } from "react-router-dom";
 
 const Routes = () => {
+  const Orders = lazy(() => import("@/pages/orders/orders"));
+  const Order = lazy(() => import("@/pages/orders/order"));
   const State = lazy(() => import("@/pages/state/state"));
   const Governorate = lazy(() => import("@/pages/governorate/governorate"));
   const City = lazy(() => import("@/pages/city/city"));
@@ -18,6 +20,8 @@ const Routes = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <ReactRoutes>
         <Route path="/" element={<>dsfsadf</>} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/:id" element={<Order />} />
         <Route path="/state" element={<State />} />
         <Route path="/state/:id" element={<Governorate />} />
         <Route path="/state/:id/:GovernorateId" element={<City />} />

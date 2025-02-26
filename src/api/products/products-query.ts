@@ -12,12 +12,14 @@ import {
   get_products,
 } from "./products-api";
 import { useNavigate } from "react-router-dom";
+import { getProductParams } from "./type";
+import { toast } from "sonner";
 
-export const getProductsQuery = () => {
+export const getProductsQuery = (params: getProductParams) => {
   const queryResults = useQuery({
-    queryKey: ["get-products"],
+    queryKey: ["get-products", { ...params }],
     queryFn: async () => {
-      const data = await get_products();
+      const data = await get_products(params);
 
       return data;
     },
@@ -51,7 +53,10 @@ export const addProductsQuery = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-products"] });
-      navigate(-1);
+      // navigate(-1);
+    },
+    onError(error: any) {
+      toast(error.response.data.result);
     },
   });
 

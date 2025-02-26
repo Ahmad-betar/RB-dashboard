@@ -18,7 +18,7 @@ const CardText = ({
     );
 
   return (
-    <p className="flex items-start gap-2 font-normal">
+    <p className="flex items-start gap-2 font-normal my-1">
       <span className="font-semibold">{title}:</span>
       {value}
     </p>

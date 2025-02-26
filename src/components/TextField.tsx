@@ -25,9 +25,11 @@ const TextField = ({
         "flex-row items-center": labelOnRight,
       })}
     >
-      <Label className={cn("mb-4", { "mb-0 font-bold": labelOnRight })}>
-        {label}:
-      </Label>
+      {label && (
+        <Label className={cn("mb-4", { "mb-0 font-bold": labelOnRight })}>
+          {label}
+        </Label>
+      )}
       <Controller
         name={name}
         control={control}

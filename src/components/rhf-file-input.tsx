@@ -5,8 +5,11 @@ import { Label } from "./ui/label";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
-import { uploadImageQuery } from "@/api/uplaod-file.ts/uplaod-file";
-import { API_BASE_URL } from "@/api/axios";
+import {
+  uploadImageQuery,
+  uploadVideoQuery,
+} from "@/api/uplaod-file.ts/uplaod-file";
+// import { API_BASE_URL } from "@/api/axios";
 import LoadingSpinner from "./loading";
 
 interface RHFInputFileProps extends InputProps {
@@ -27,7 +30,8 @@ const RHFIileInput = ({
   type,
   ...props
 }: RHFInputFileProps) => {
-  const { mutate, isPending } = uploadImageQuery({});
+  const { mutate: addImage, isPending: isAddingImage } = uploadImageQuery({});
+  const { mutate: addVideo, isPending: isAddingVideo } = uploadVideoQuery({});
   const { control, setValue } = useFormContext();
   const file = useWatch({ name, control });
 
@@ -39,13 +43,21 @@ const RHFIileInput = ({
 
     if (type === "image") {
       formData.append("image", newfile);
-    }
 
-    mutate(formData, {
-      onSuccess: (data) => {
-        setValue(name, data.imageUrl);
-      },
-    });
+      addImage(formData, {
+        onSuccess: (data) => {
+          setValue(name, data.imageUrl);
+        },
+      });
+    } else {
+      formData.append("video", newfile);
+
+      addVideo(formData, {
+        onSuccess: (data) => {
+          setValue(name, data.videoUrl);
+        },
+      });
+    }
   };
 
   if (file) {
@@ -84,16 +96,18 @@ const RHFIileInput = ({
                 "cursor-pointer w-full"
               )}
             >
-              {isPending ? <LoadingSpinner /> : Icon}
+              {isAddingImage || isAddingVideo ? <LoadingSpinner /> : Icon}
               <Input
+                // required
                 id={id}
                 type="file"
+                accept={type === "video" ? "video/*" : "image/*"}
                 className="hidden"
                 name={name}
                 ref={ref}
                 // value={value}
                 onChange={changeHandler}
-                disabled={isPending}
+                disabled={isAddingImage || isAddingVideo}
                 // {...field}
                 // onChange={onChange}
                 {...props}

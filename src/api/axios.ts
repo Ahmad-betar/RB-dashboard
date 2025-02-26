@@ -14,7 +14,7 @@ export const axiosInstance = axsio.create({
 axiosInstance.interceptors.request.use((config) => {
   // config.headers.Authorization = "Bearer " + localStorage.getItem("token");
   config.headers.Authorization =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11aGFtbWFkay5oMS4xLjIwMDFAZ21haWwuY29tIiwidXNlcklkIjoiNjc5Mzg2MzU5MzM3MzRhNzA1NDdjZjIyIiwiaWF0IjoxNzM5MDQ5NDg5LCJleHAiOjE3NDE2NDE0ODl9.uT3NSCuSlfZXLLCOBGhRqMwFhHAlyNknqJuZB3KT8tU";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11aGFtbWFkay5oMS4xLjIwMDFAZ21haWwuY29tIiwidXNlcklkIjoiNjc5Mzg2MzU5MzM3MzRhNzA1NDdjZjIyIiwiaWF0IjoxNzM5MjIzNDE1LCJleHAiOjE3NDE4MTU0MTV9.KsKv1WxKHSrwblD6_BUpPemFKvoXO7IHs_MvQ89Chx4";
 
   return config;
 });

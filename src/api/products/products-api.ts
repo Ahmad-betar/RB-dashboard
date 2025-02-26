@@ -1,11 +1,16 @@
 import { API_ROUTES } from "../api-routes";
 import { axiosInstance } from "../axios";
-import { addProductType, getProductType, ProductType } from "./type";
+import {
+  addProductType,
+  getProductParams,
+  getProductType,
+  ProductType,
+} from "./type";
 
-export const get_products = async () => {
+export const get_products = async (params: getProductParams) => {
   const { data } = await axiosInstance.get<getProductType>(
-    API_ROUTES.product.get
-    // params
+    API_ROUTES.product.get,
+    { params }
   );
 
   return data;

@@ -4,6 +4,7 @@ import {
   Archive,
   Building2,
   PackageSearch,
+  ScrollText,
   CircleDollarSign,
 } from "lucide-react";
 
@@ -12,6 +13,11 @@ export const nav_links = [
     logo: House, // Use the House icon for Home
     label: "Home",
     link: "/",
+  },
+  {
+    logo: ScrollText,
+    label: "Orders",
+    link: "/orders",
   },
   {
     logo: Archive, // Use the Book icon for Posts

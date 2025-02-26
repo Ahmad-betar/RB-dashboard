@@ -37,13 +37,15 @@ const RHFSelect = ({
         "flex-row gap-4": labelOnright,
       })}
     >
-      <Label
-        className={cn("mb-2", {
-          "flex items-center font-bold mb-0 p-1": labelOnright,
-        })}
-      >
-        {label + (label ? ":" : "")}
-      </Label>
+      {label && (
+        <Label
+          className={cn("mb-2", {
+            "flex items-center font-bold mb-0 p-1": labelOnright,
+          })}
+        >
+          {label}
+        </Label>
+      )}
 
       <Controller
         name={name}

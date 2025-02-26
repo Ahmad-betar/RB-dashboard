@@ -1,12 +1,12 @@
 export interface getProductParams {
-  search: string;
+  search?: string;
   page: number;
-  sort: string;
-  limit: number;
-  minPrice: number;
-  maxPrice: number;
-  sizes: number;
-  productType: string;
+  sort?: string;
+  limit?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  sizes?: number;
+  productType?: string;
 }
 
 export interface ProductType {
@@ -16,6 +16,7 @@ export interface ProductType {
   price: number;
   logoUrl: string;
   imagesUrls: string[];
+  videosUrls: string[];
   availableSizes: string[];
   productType: {
     _id: string;
@@ -52,8 +53,10 @@ export interface addProduct {
 
 export interface addProductForm extends addProduct {
   imagesUrls: { image: string | undefined | null }[];
+  videosUrls: { video: string | undefined | null }[];
 }
 
 export interface addProductType extends addProduct {
   imagesUrls: (string | undefined)[];
+  videosUrls: (string | undefined)[];
 }

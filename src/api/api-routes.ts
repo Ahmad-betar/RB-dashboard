@@ -42,6 +42,12 @@ export const API_ROUTES = {
     delete: "admin/coupon/",
   },
 
+  orders: {
+    get: "admin/orders",
+    getOne: "admin/orders/", //params
+    status: "orderStatuses",
+  },
+
   file: {
     image: "admin/upload/image",
     video: "admin/upload/video",

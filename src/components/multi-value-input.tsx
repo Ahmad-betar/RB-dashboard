@@ -63,6 +63,7 @@ const MultiValueInput = ({
         inputValue={inputValue}
         isClearable
         isMulti
+        required
         menuIsOpen={false}
         onChange={(newValue) => {
           setValue(newValue as Option[]);

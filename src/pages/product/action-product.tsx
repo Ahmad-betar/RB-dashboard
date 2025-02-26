@@ -6,7 +6,7 @@ import RHFSelect from "@/components/rhf-select";
 import RHFTextarea from "@/components/rhf-textarea";
 import TextField from "@/components/TextField";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Image, Plus } from "lucide-react";
+import { Image, Plus, Video } from "lucide-react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import {
@@ -32,10 +32,17 @@ const ActionProduct = () => {
   const methods = useForm<addProductForm>({
     defaultValues: { imagesUrls: [] },
   });
-  const { fields, append } = useFieldArray<addProductForm>({
-    control: methods.control,
-    name: "imagesUrls",
-  });
+  const { fields: images, append: appendImage } = useFieldArray<addProductForm>(
+    {
+      control: methods.control,
+      name: "imagesUrls",
+    }
+  );
+  const { fields: videos, append: appendVideos } =
+    useFieldArray<addProductForm>({
+      control: methods.control,
+      name: "videosUrls",
+    });
 
   const submitHandler = (data: addProductForm) => {
     id
@@ -44,11 +51,13 @@ const ActionProduct = () => {
           params: {
             ...data,
             imagesUrls: data.imagesUrls.map(({ image }) => image ?? undefined),
+            videosUrls: data.videosUrls.map(({ video }) => video ?? undefined),
           },
         })
       : add({
           ...data,
           imagesUrls: data.imagesUrls.map(({ image }) => image ?? undefined),
+          videosUrls: data.videosUrls.map(({ video }) => video ?? undefined),
         });
   };
 
@@ -60,6 +69,9 @@ const ActionProduct = () => {
         productTypeId: values?.productType._id,
         imagesUrls: values?.imagesUrls.map((imageUrl) => ({
           image: imageUrl,
+        }))!,
+        videosUrls: values?.videosUrls.map((videoUrl) => ({
+          video: videoUrl,
         }))!,
       });
 
@@ -148,20 +160,49 @@ const ActionProduct = () => {
           <Label>Product Images:</Label>
 
           <div className="md:flex gap-4">
-            {fields.map(({ id }, index) => (
+            {images.map(({ id }, index) => (
               <RHFIileInput
                 key={id}
                 Icon={<Image />}
                 name={`imagesUrls.${index}.image`}
-                id={"logo" + id}
+                id={"image" + id}
                 type="image"
               />
             ))}
 
-            {fields.length <= 9 && (
+            {images.length <= 9 && (
               <Button
                 type="button"
-                onClick={() => append({ image: undefined })}
+                onClick={() => appendImage({ image: undefined })}
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "w-full md:w-fit mt-2 md:mt-0",
+                })}
+              >
+                <Plus className="fill-black stroke-black" />
+              </Button>
+            )}
+          </div>
+        </div>
+
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col gap-4">
+          <Label>Product Videos:</Label>
+
+          <div className="md:flex gap-4">
+            {videos.map(({ id }, index) => (
+              <RHFIileInput
+                key={id}
+                Icon={<Video />}
+                name={`videosUrls.${index}.video`}
+                id={"video" + id}
+                type="video"
+              />
+            ))}
+
+            {videos.length <= 9 && (
+              <Button
+                type="button"
+                onClick={() => appendVideos({ video: undefined })}
                 className={buttonVariants({
                   variant: "outline",
                   className: "w-full md:w-fit mt-2 md:mt-0",
