@@ -1,4 +1,3 @@
-import React from "react";
 import { Control, Controller } from "react-hook-form";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
@@ -23,16 +22,12 @@ const RHFCalendar = ({
       control={control}
       render={({ field }) => (
         <div className={cn("flex flex-col flex-grow w-full", {})}>
-          {label && (
-            <Label className={cn("mb-4")}>
-              {label}
-            </Label>
-          )}
+          {label && <Label className={cn("mb-4")}>{label}</Label>}
 
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline">
-                {field.value ? format(field.value, "PPP") : "Start Date"}
+                {field.value ? format(field.value, "PPP") : label}
                 <CalendarIcon className="ml-2 h-4 w-4" />
               </Button>
             </PopoverTrigger>

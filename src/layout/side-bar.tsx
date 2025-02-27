@@ -6,7 +6,7 @@ import { nav_links } from "./nav-links";
 import { Link } from "react-router-dom";
 import logout from "@/assets/log-out.svg";
 import moon from "@/assets/moon.svg";
-import main from "@/assets/react.svg";
+import main from "@/assets/logo.svg";
 // import {
 //   Menubar,
 //   MenubarContent,
@@ -31,10 +31,10 @@ const SideNav = () => {
 
       <DrawerContent
         className={cn(
-          "flex flex-col col-span-1 gap-8 w-64 p-5 bg-gray-800 text-white shadow-md rounded-none border-none"
+          "flex flex-col col-span-1 gap-8 w-64 p-5  text-white shadow-md rounded-none border-none"
         )}
       >
-        <img className="w-5 h-5" src={main} alt="" />
+        <img className="w-10 h-10" src={main} alt="" />
 
         <nav className="flex-grow">
           <ul className="">
@@ -43,7 +43,7 @@ const SideNav = () => {
                 {
                   <DrawerClose asChild>
                     <Link to={link} key={index}>
-                      <li className="flex items-center gap-2 p-2 my-2 hover:bg-gray-700">
+                      <li className="flex items-center gap-2 p-2 my-2 text-black hover:bg-gray-100">
                         <Logo className="w-5 h-5" />
 
                         {label}

@@ -17,12 +17,11 @@ const OrderCard = ({ order }: OrderCardProps) => {
             <span>Order #</span>
             <span>{order._id}</span>
 
-            <Badge
-              className="absolute top-5 right-5"
-              variant={order.isUrgent ? "destructive" : "default"}
-            >
-              {order.isUrgent ? "Urgent" : "Normal"}
-            </Badge>
+            {order.isUrgent && (
+              <Badge className="absolute top-2 right-2" variant={"destructive"}>
+                Urgent
+              </Badge>
+            )}
           </CardTitle>
         </CardHeader>
 

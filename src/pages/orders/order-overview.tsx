@@ -41,13 +41,13 @@ const OrderOverview = ({ order }: OrderOverviewProps) => {
 
         <div>
           <p className="text-sm text-muted-foreground">Paid</p>
-          <Badge variant={order?.isPaid ? "default" : "destructive"}>
+          <Badge variant={order?.isPaid ? "success" : "destructive"}>
             {order?.isPaid ? "Yes" : "No"}
           </Badge>
         </div>
         <div>
           <p className="text-sm text-muted-foreground">Urgent</p>
-          <Badge variant={order?.isUrgent ? "default" : "destructive"}>
+          <Badge variant={!order?.isUrgent ? "default" : "destructive"}>
             {order?.isUrgent ? "Yes" : "No"}
           </Badge>
         </div>

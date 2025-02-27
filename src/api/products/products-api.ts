@@ -7,7 +7,7 @@ import {
   ProductType,
 } from "./type";
 
-export const get_products = async (params: getProductParams) => {
+export const get_products = async (params?: getProductParams) => {
   const { data } = await axiosInstance.get<getProductType>(
     API_ROUTES.product.get,
     { params }

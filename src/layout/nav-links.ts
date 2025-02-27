@@ -6,6 +6,8 @@ import {
   PackageSearch,
   ScrollText,
   CircleDollarSign,
+  User,
+  BriefcaseBusiness,
 } from "lucide-react";
 
 export const nav_links = [
@@ -18,6 +20,16 @@ export const nav_links = [
     logo: ScrollText,
     label: "Orders",
     link: "/orders",
+  },
+  {
+    logo: User,
+    label: "Customer",
+    link: "/customers",
+  },
+  {
+    logo: BriefcaseBusiness,
+    label: "Operators",
+    link: "/operators",
   },
   {
     logo: Archive, // Use the Book icon for Posts

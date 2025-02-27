@@ -28,8 +28,8 @@ const RHFIileInput = ({
   type,
   ...props
 }: RHFInputFileProps) => {
-  const { mutate: addImage, isPending: isAddingImage } = uploadImageQuery({});
-  const { mutate: addVideo, isPending: isAddingVideo } = uploadVideoQuery({});
+  const { mutate: addImage, isPending: isAddingImage } = uploadImageQuery();
+  const { mutate: addVideo, isPending: isAddingVideo } = uploadVideoQuery();
   const { control, setValue } = useFormContext();
   const file = useWatch({ name, control });
 
@@ -91,7 +91,7 @@ const RHFIileInput = ({
       <Controller
         name={name}
         control={control}
-        render={({ field: { name, ref, value } }) => (
+        render={({ field: { name, ref } }) => (
           <div className={cn({ "flex flex-col gap-4 justify-between": label })}>
             {label && <Label>{label}</Label>}
             <Label

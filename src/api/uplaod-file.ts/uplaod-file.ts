@@ -22,7 +22,7 @@ const uplaodVideo = async (params: any) => {
   return data;
 };
 
-export const uploadImageQuery = (params: any) => {
+export const uploadImageQuery = () => {
   const queryResult = useMutation({
     mutationKey: ["uplaod-image"],
     mutationFn: uplaodImage,
@@ -31,7 +31,7 @@ export const uploadImageQuery = (params: any) => {
   return queryResult;
 };
 
-export const uploadVideoQuery = (params: any) => {
+export const uploadVideoQuery = () => {
   const queryResult = useMutation({
     mutationKey: ["uplaod-video"],
     mutationFn: uplaodVideo,

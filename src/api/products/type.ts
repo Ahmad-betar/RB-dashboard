@@ -9,14 +9,19 @@ export interface getProductParams {
   productType?: string;
 }
 
+export interface imageType {
+  url: string;
+  publicId: string;
+  _id?: string;
+}
 export interface ProductType {
   _id: string;
   title: string;
   description: string;
   price: number;
-  logoUrl: string;
-  imagesUrls: string[];
-  videosUrls: string[];
+  logo: imageType;
+  images: imageType[];
+  videos: imageType[];
   availableSizes: string[];
   productType: {
     _id: string;
@@ -57,6 +62,6 @@ export interface addProductForm extends addProduct {
 }
 
 export interface addProductType extends addProduct {
-  imagesUrls: (string | undefined|null)[];
+  imagesUrls: (string | undefined | null)[];
   videosUrls: (string | undefined | null)[];
 }

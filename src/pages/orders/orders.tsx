@@ -15,7 +15,9 @@ import {
 import RHFPagination from "@/components/rhf-pagination";
 
 const Orders = () => {
-  const methods = useForm<GetOrdersParams>({ defaultValues: { page: 1 } });
+  const methods = useForm<GetOrdersParams>({
+    defaultValues: { page: 1, isUrgent: true, isPaid: true },
+  });
   const values = methods.watch();
 
   const { data, isLoading } = getOrdersQuery({ ...values });

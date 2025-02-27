@@ -14,9 +14,19 @@ const OrderFilters = () => {
 
         <RHFCalendar name="endDate" control={control} label="End Date" />
 
-        <TextField control={control} label="Min Amount" name="minAmount" />
+        <TextField
+          type="number"
+          control={control}
+          label="Min Amount"
+          name="minAmount"
+        />
 
-        <TextField control={control} label="Max Amount" name="maxAmount" />
+        <TextField
+          type="number"
+          control={control}
+          label="Max Amount"
+          name="maxAmount"
+        />
       </div>
 
       <div className="flex gap-4 justify-end my-4">

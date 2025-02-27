@@ -29,3 +29,14 @@ export interface getCouponsType {
   pages: number;
   data: couponType[];
 }
+
+export type CouponFormValues = {
+  code: string;
+  discount: number;
+  discountType: "percentage" | "value";
+  maxDiscount: number;
+  minOrderAmount: number;
+  usageLimit: number;
+  expirationDate: Date;
+  validFor: string[];
+};

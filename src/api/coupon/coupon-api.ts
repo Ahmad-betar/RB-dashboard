@@ -1,8 +1,9 @@
 import { API_ROUTES } from "../api-routes";
 import { axiosInstance } from "../axios";
+import { getCouponsType } from "./type";
 
 export const get_coupons = async () => {
-  const { data } = await axiosInstance.get(
+  const { data } = await axiosInstance.get<getCouponsType>(
     API_ROUTES.coupon.get
   );
 

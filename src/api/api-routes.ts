@@ -47,6 +47,14 @@ export const API_ROUTES = {
     getOne: "admin/orders/", //params
     status: "orderStatuses",
   },
+  customers: {
+    get: "admin/customers",
+  },
+  operator: {
+    get: "admin/operators",
+    add: "/admin/operator",
+    delete: "admin/operator/", //params
+  },
 
   file: {
     image: "admin/upload/image",

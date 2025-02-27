@@ -1,7 +1,7 @@
 import { Input, InputProps } from "./ui/input";
 import { Label } from "./ui/label";
 import { cn } from "@/lib/utils";
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, FieldError } from "react-hook-form";
 
 interface TextFieldProps extends InputProps {
   label: string;
@@ -9,6 +9,8 @@ interface TextFieldProps extends InputProps {
   name: string;
   placeholder?: string;
   labelOnRight?: boolean;
+  rules?: any; // Validation rules
+  error?: FieldError | undefined; // Error object from react-hook-form
 }
 
 const TextField = ({
@@ -17,6 +19,8 @@ const TextField = ({
   label,
   placeholder,
   labelOnRight,
+  rules,
+  error,
   ...props
 }: TextFieldProps) => {
   return (
@@ -33,13 +37,21 @@ const TextField = ({
       <Controller
         name={name}
         control={control}
+        rules={rules} // Pass validation rules
         render={({ field }) => (
-          <Input
-            placeholder={placeholder || ""}
-            className="mr-4"
-            {...field}
-            {...props}
-          />
+          <div className="w-full">
+            <Input
+              placeholder={placeholder || ""}
+              className={cn("mr-4", {
+                "border-red-500": error, // Add red border if there's an error
+              })}
+              {...field}
+              {...props}
+            />
+            {error && (
+              <p className="text-sm text-red-500 mt-1">{error.message}</p> // Display error message
+            )}
+          </div>
         )}
       />
     </div>

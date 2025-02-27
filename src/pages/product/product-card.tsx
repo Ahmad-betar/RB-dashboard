@@ -4,7 +4,6 @@ import { Pen, Video } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DeleteDialog from "@/components/delete-dialog";
 import { ProductType } from "@/api/products/type";
-import { API_BASE_URL } from "@/api/axios";
 import RhfDialog from "@/components/rhf-dialog";
 
 interface ProductCardProps {
@@ -18,7 +17,7 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
         <img
-          src={`${API_BASE_URL}${product.logoUrl}`}
+          src={product.logo.url}
           alt={product.title}
           className="w-full h-48 object-cover rounded-t-lg"
         />
@@ -45,18 +44,18 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
 
         {/* Images Dialog */}
         <div className="mt-4 flex flex-wrap gap-2">
-          {product.imagesUrls.map((imageUrl, index) => (
+          {product.images.map(({ url }, index) => (
             <RhfDialog
               key={index}
               trigger={
                 <img
-                  src={`${API_BASE_URL}${imageUrl}`}
+                  src={url}
                   className="w-full h-full object-cover rounded-sm"
                 />
               }
               content={
                 <img
-                  src={`${API_BASE_URL}${imageUrl}`}
+                  src={url}
                   alt={`Image ${index + 1}`}
                   className="w-full h-full object-contain rounded-lg"
                 />
@@ -67,13 +66,13 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
 
         {/* Videos Dialog */}
         <div className="mt-4 flex flex-wrap gap-2">
-          {product.videosUrls.map((videoUrl, index) => (
+          {product.videos.map(({ url }, index) => (
             <RhfDialog
               key={index}
               trigger={<Video className="w-10 h-10" />}
               content={
                 <video controls className="w-full h-full rounded-lg">
-                  <source src={`${API_BASE_URL}${videoUrl}`} type="video/mp4" />
+                  <source src={url} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               }
