@@ -17,11 +17,12 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader className="p-0">
         <img
-          src={product.logo.url}
+          src={product.logo?.url}
           alt={product.title}
           className="w-full h-48 object-cover rounded-t-lg"
         />
       </CardHeader>
+
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">{product.title}</CardTitle>
@@ -38,7 +39,7 @@ const ProductCard = ({ product, onDelete, isDeleting }: ProductCardProps) => {
           </p>
           <p className="text-sm">
             <span className="font-medium">Type:</span>{" "}
-            {product.productType.name}
+            {product.productType?.name}
           </p>
         </div>
 

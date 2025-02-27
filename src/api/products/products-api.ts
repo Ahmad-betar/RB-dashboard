@@ -1,7 +1,7 @@
 import { API_ROUTES } from "../api-routes";
 import { axiosInstance } from "../axios";
 import {
-  addProductType,
+  addProduct,
   getProductParams,
   getProductType,
   ProductType,
@@ -24,8 +24,8 @@ export const get_one_product = async (id: string) => {
   return data;
 };
 
-export const add_products = async (body: addProductType) => {
-  const { data } = await axiosInstance.post<addProductType>(
+export const add_products = async (body: addProduct) => {
+  const { data } = await axiosInstance.post<addProduct>(
     API_ROUTES.product.create,
     body
   );
@@ -38,7 +38,7 @@ export const edit_products = async ({
   params,
 }: {
   id: string;
-  params: addProductType;
+  params: addProduct;
 }) => {
   const { data } = await axiosInstance.put(
     API_ROUTES.product.edit + id,

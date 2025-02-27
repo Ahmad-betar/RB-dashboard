@@ -83,7 +83,7 @@ const SideNav = () => {
         </nav>
 
         <div className=" flex flex-col gap-8">
-          <div className={cn("flex items-center justify-between")}>
+          {/* <div className={cn("flex items-center justify-between")}>
             {
               <div className="flex items-center gap-2">
                 <img className="w-5 h-5" src={moon} alt="" />
@@ -92,7 +92,7 @@ const SideNav = () => {
             }
 
             <Switch />
-          </div>
+          </div> */}
 
           <Button
             className="w-full flex justify-start gap-4 p-2"

@@ -1,11 +1,11 @@
 import { API_ROUTES } from "../api-routes";
 import { axiosInstance } from "../axios";
-import { addProductTypeForm, getParentProductType } from "./type";
+import { addProductTypePayload, getParentProductType } from "./type";
 
 // Get Parent Product Types
 export const get_parent_product_types = async () => {
   const { data } = await axiosInstance.get<getParentProductType>(
-     API_ROUTES.productType.getParent
+    API_ROUTES.productType.getParent
   );
   return data;
 };
@@ -13,15 +13,15 @@ export const get_parent_product_types = async () => {
 // Get Children Product Types
 export const get_children_product_types = async (parentId: string) => {
   const { data } = await axiosInstance.get<getParentProductType>(
-     API_ROUTES.productType.getChildren + parentId
+    API_ROUTES.productType.getChildren + parentId
   );
   return data;
 };
 
 // Create Product Type
-export const create_product_type = async (params: any) => {
-  const { data } = await axiosInstance.post<addProductTypeForm>(
-     API_ROUTES.productType.create,
+export const create_product_type = async (params: addProductTypePayload) => {
+  const { data } = await axiosInstance.post(
+    API_ROUTES.productType.create,
     params
   );
   return data;
@@ -29,9 +29,8 @@ export const create_product_type = async (params: any) => {
 
 // Delete Product Type
 export const delete_product_type = async (id: string) => {
-  const { data } = await axiosInstance.delete(
-     API_ROUTES.productType.delete,
-    { data: { productTypesIds: id } }
-  );
+  const { data } = await axiosInstance.delete(API_ROUTES.productType.delete, {
+    data: { productTypesIds: id },
+  });
   return data;
 };

@@ -16,7 +16,6 @@ interface Props {
   className?: string;
   labelOnright?: boolean;
   required?: boolean;
-  onValueChange?: (value: string) => void;
   name: string;
   control: Control<any, any>;
 }
@@ -27,13 +26,12 @@ const RHFSelect = ({
   className,
   label,
   labelOnright,
-  onValueChange,
   name,
   control,
 }: Props) => {
   return (
     <div
-      className={cn("flex flex-col justify-between", {
+      className={cn("flex flex-col justify-between w-full", {
         "flex-row gap-4": labelOnright,
       })}
     >
@@ -51,7 +49,7 @@ const RHFSelect = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <Select required={required} {...field} onValueChange={onValueChange}>
+          <Select required={required} {...field} onValueChange={field.onChange}>
             <SelectTrigger
               className={cn("", { "w-full": labelOnright }, className)}
             >

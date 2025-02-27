@@ -1,27 +1,24 @@
 import { Controller, useFormContext, useWatch } from "react-hook-form";
-import { ReactNode } from "react";
 import { Input, InputProps } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { X } from "lucide-react";
+import { Image, Video, X } from "lucide-react";
 import {
   uploadImageQuery,
   uploadVideoQuery,
 } from "@/api/uplaod-file.ts/uplaod-file";
 import LoadingSpinner from "./loading";
-import { API_BASE_URL } from "@/api/axios";
+import { imageType } from "@/api/uplaod-file.ts/type";
 
 interface RHFInputFileProps extends InputProps {
   name: string;
-  Icon: ReactNode;
   id: string;
   label?: string;
-  type: "image" | "audio" | "video";
+  type: "image" | "video";
 }
 
 const RHFIileInput = ({
-  Icon,
   id,
   name,
   label,
@@ -36,52 +33,63 @@ const RHFIileInput = ({
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData();
 
-    const newfile = e.target.files?.[0];
-    if (!newfile) return;
+    const newfiles = e.target.files;
+    if (!newfiles) return;
+
+    for (var i = 0; i < newfiles.length; i++) {
+      formData.append(
+        type === "image" ? "images" : "videos",
+        newfiles.item(i)!
+      );
+    }
 
     if (type === "image") {
-      formData.append("image", newfile);
-
       addImage(formData, {
         onSuccess: (data) => {
-          setValue(name, data.imageUrl);
+          setValue(name, data.images);
         },
       });
     } else {
-      formData.append("video", newfile);
-
       addVideo(formData, {
         onSuccess: (data) => {
-          setValue(name, data.videoUrl);
+          setValue(name, data.videos);
         },
       });
     }
   };
 
-  const removeFile = () => {
-    setValue(name, null); // Set the value to null or undefined to remove the file
+  const removeFile = (index: number) => {
+    let newArr = file;
+    newArr.splice(index, 1);
+
+    setValue(name, newArr.length === 0 ? null : newArr);
   };
 
   if (file) {
-    const imageUrl = API_BASE_URL + file;
-
     return (
       <div
         className={cn("flex flex-col w-full gap-4 justify-between md:w-fit")}
       >
         {label && <Label>{label}</Label>}
-        <Button
-          type="button"
-          variant={"outline"}
-          style={{
-            backgroundImage: `url('${imageUrl}')`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-          onClick={removeFile} // Use the removeFile function here
-        >
-          <X className="stroke-black" />
-        </Button>
+
+        <div className="flex gap-2 w-full">
+          {file.map((file: imageType, idx: number) => (
+            <Button
+              key={idx}
+              type="button"
+              variant={"outline"}
+              style={{
+                backgroundImage: `url('${file.url}')`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                width: "100%",
+              }}
+              onClick={() => removeFile(idx)}
+            >
+              <X className="stroke-black" />
+            </Button>
+          ))}
+        </div>
       </div>
     );
   }
@@ -91,7 +99,7 @@ const RHFIileInput = ({
       <Controller
         name={name}
         control={control}
-        render={({ field: { name, ref } }) => (
+        render={({ field: { ref } }) => (
           <div className={cn({ "flex flex-col gap-4 justify-between": label })}>
             {label && <Label>{label}</Label>}
             <Label
@@ -101,13 +109,19 @@ const RHFIileInput = ({
                 "cursor-pointer w-full"
               )}
             >
-              {isAddingImage || isAddingVideo ? <LoadingSpinner /> : Icon}
+              {isAddingImage || isAddingVideo ? (
+                <LoadingSpinner />
+              ) : type === "image" ? (
+                <Image />
+              ) : (
+                <Video />
+              )}
               <Input
                 id={id}
                 type="file"
                 accept={type === "video" ? "video/*" : "image/*"}
                 className="hidden"
-                name={name}
+                // name={name}
                 ref={ref}
                 onChange={changeHandler}
                 disabled={isAddingImage || isAddingVideo}

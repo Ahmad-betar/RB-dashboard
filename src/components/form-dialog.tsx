@@ -32,7 +32,7 @@ const FormDialog = ({
         {trigger}
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="w-[80%]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

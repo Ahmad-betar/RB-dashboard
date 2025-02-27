@@ -14,34 +14,39 @@ interface ProductFiltersProps {
 }
 
 const ProductFilters = ({ productTypes }: ProductFiltersProps) => {
-  const { control, setValue } = useFormContext();
+  const { control } = useFormContext();
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>Filters</AccordionTrigger>
         <AccordionContent className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <TextField name="search" control={control} label="Search" />
+          <TextField
+            name="search"
+            control={control}
+            label="Search"
+            placeholder="Search"
+          />
 
           <RHFSelect
             control={control}
             name="sort"
             label="Sort By"
+            placeholder="Sort by"
             items={[
               { label: "Ascending", value: "name:asc" },
               { label: "Descending", value: "name:desc" },
             ]}
-            onValueChange={(value) => setValue("sort", value)}
           />
 
           <RHFSelect
             control={control}
             name="productType"
             label="Product Type"
+            placeholder="Product Type"
             items={productTypes.map(({ _id, name }) => ({
               label: name,
               value: _id,
             }))}
-            onValueChange={(value) => setValue("productType", value)}
           />
 
           <div>

@@ -1,3 +1,5 @@
+import { imageType, videoType } from "../uplaod-file.ts/type";
+
 export interface getProductParams {
   search?: string;
   page: number;
@@ -9,11 +11,6 @@ export interface getProductParams {
   productType?: string;
 }
 
-export interface imageType {
-  url: string;
-  publicId: string;
-  _id?: string;
-}
 export interface ProductType {
   _id: string;
   title: string;
@@ -53,15 +50,7 @@ export interface addProduct {
   price: number;
   productTypeId: string;
   availableSizes: string[];
-  logoUrl: string;
-}
-
-export interface addProductForm extends addProduct {
-  imagesUrls: { image: string | undefined | null }[];
-  videosUrls: { video: string | undefined | null }[];
-}
-
-export interface addProductType extends addProduct {
-  imagesUrls: (string | undefined | null)[];
-  videosUrls: (string | undefined | null)[];
+  logo: imageType | imageType[];
+  images: imageType[];
+  videos: videoType[];
 }

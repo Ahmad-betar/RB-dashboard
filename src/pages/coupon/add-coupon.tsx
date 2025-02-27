@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { addCouponQuery } from "@/api/coupon/coupon-query";
 import { Button } from "@/components/ui/button";
 import TextField from "@/components/TextField";
-import { toast } from "sonner";
 import { CouponFormValues } from "@/api/coupon/type";
 import RHFSelect from "@/components/rhf-select";
 import RHFCalendar from "@/components/rhf-calendar";

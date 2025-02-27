@@ -10,7 +10,7 @@ export const API_ROUTES = {
   productType: {
     getParent: "parentProductTypes",
     getChildren: "childrenProductTypes/",
-    create: "admin/productTypes",
+    create: "admin/productType",
     delete: "admin/productTypes/",
   },
 
@@ -57,7 +57,7 @@ export const API_ROUTES = {
   },
 
   file: {
-    image: "admin/upload/image",
+    image: "admin/upload/images",
     video: "admin/upload/video",
   },
 };

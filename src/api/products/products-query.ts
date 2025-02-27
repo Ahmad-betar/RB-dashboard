@@ -38,6 +38,7 @@ export const getOneProductsQuery = (id: string) => {
       return data;
     },
     placeholderData: keepPreviousData,
+    enabled: !!id,
   });
 
   return queryResults;

@@ -16,7 +16,7 @@ const RhfDialog = ({
           {trigger}
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex justify-center h-[50vh]">
+      <DialogContent className="flex justify-center">
         {content}
       </DialogContent>
     </Dialog>

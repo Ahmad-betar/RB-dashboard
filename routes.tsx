@@ -14,6 +14,9 @@ const Routes = () => {
   const Product = lazy(() => import("@/pages/product/product"));
   const ActionProduct = lazy(() => import("@/pages/product/action-product"));
   const ProductType = lazy(() => import("@/pages/product-type/product-type"));
+  const AddProductType = lazy(
+    () => import("@/pages/product-type/add-product-type")
+  );
   const ChildrenProductType = lazy(
     () => import("@/pages/product-type/children-product-type")
   );
@@ -38,6 +41,7 @@ const Routes = () => {
         <Route path="/action-product" element={<ActionProduct />} />
         <Route path="/action-product/:id" element={<ActionProduct />} />
         <Route path="/product-type" element={<ProductType />} />
+        <Route path="/add-product-type" element={<AddProductType />} />
         <Route path="/product-type/:id" element={<ChildrenProductType />} />
       </ReactRoutes>
     </Suspense>

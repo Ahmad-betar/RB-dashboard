@@ -1,14 +1,12 @@
 import { getParentProductTypesQuery } from "@/api/product-type/product-type-query";
-import { addProductForm } from "@/api/products/type";
+import { addProduct } from "@/api/products/type";
 import RHFIileInput from "@/components/rhf-file-input";
 import LoadingSpinner from "@/components/loading";
 import RHFSelect from "@/components/rhf-select";
 import RHFTextarea from "@/components/rhf-textarea";
 import TextField from "@/components/TextField";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Image, Plus, Video } from "lucide-react";
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { FormProvider, useForm } from "react-hook-form";
 import {
   addProductsQuery,
   editProductsQuery,
@@ -18,10 +16,12 @@ import Title from "@/components/title";
 import MultiValueInput from "@/components/multi-value-input";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
+import { imageType } from "@/api/uplaod-file.ts/type";
 
 const ActionProduct = () => {
   const { id } = useParams();
+  const methods = useForm<addProduct>();
   const [value, setValue] = useState([]);
 
   const { data, isLoading } = getOneProductsQuery(id!);
@@ -29,58 +29,29 @@ const ActionProduct = () => {
     getParentProductTypesQuery();
   const { mutate: add, isPending: isAdding } = addProductsQuery();
   const { mutate: edit, isPending: isEditing } = editProductsQuery();
-  const methods = useForm<addProductForm>({
-    defaultValues: { imagesUrls: [] },
-  });
-  const { fields: images, append: appendImage } = useFieldArray<addProductForm>(
-    {
-      control: methods.control,
-      name: "imagesUrls",
-    }
-  );
-  const { fields: videos, append: appendVideos } =
-    useFieldArray<addProductForm>({
-      control: methods.control,
-      name: "videosUrls",
-    });
 
-  const submitHandler = (data: addProductForm) => {
-    const imagesUrls = data.imagesUrls
-      .filter(({ image }) => image !== null)
-      .map(({ image }) => image);
-
-    const videosUrls = data.videosUrls
-      .filter(({ video }) => video !== null)
-      .map(({ video }) => video);
-
+  const submitHandler = (data: addProduct) => {
     id
       ? edit({
           id,
           params: {
             ...data,
-            imagesUrls,
-            videosUrls,
+            logo: (data.logo as imageType[])[0],
           },
         })
       : add({
           ...data,
-          imagesUrls,
-          videosUrls,
+          logo: (data.logo as imageType[])[0],
         });
   };
 
   useEffect(() => {
     const values = data?.data;
+
     if (id) {
       methods.reset({
         ...values,
         productTypeId: values?.productType._id,
-        imagesUrls: values?.imagesUrls.map((imageUrl) => ({
-          image: imageUrl,
-        }))!,
-        videosUrls: values?.videosUrls.map((videoUrl) => ({
-          video: videoUrl,
-        }))!,
       });
 
       setValue(
@@ -95,7 +66,7 @@ const ActionProduct = () => {
   if (parentProductTypeLoading || isLoading) return <LoadingSpinner />;
   return (
     <FormProvider {...methods}>
-      <Title title="Add Product" />
+      <Title title={id ? "Edit Product" : "Add Product"} />
 
       <form
         onSubmit={methods.handleSubmit(submitHandler)}
@@ -143,9 +114,6 @@ const ActionProduct = () => {
           }
           placeholder="Enter Product Type"
           label="Product Type"
-          onValueChange={(value: string) => {
-            methods.setValue("productTypeId", value);
-          }}
         />
 
         <MultiValueInput
@@ -155,71 +123,23 @@ const ActionProduct = () => {
           label="Available Sizes"
         />
 
+        <RHFIileInput name="logo" id="logo" type="image" label="Logo:" />
+
         <RHFIileInput
-          Icon={<Image />}
-          name="logoUrl"
-          id="logo"
+          multiple
+          name="images"
+          id="images"
           type="image"
-          label="Logo:"
+          label="Select Multiple Images:"
         />
 
-        <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col gap-4">
-          <Label>Product Images:</Label>
-
-          <div className="md:flex gap-4">
-            {images.map(({ id }, index) => (
-              <RHFIileInput
-                key={id}
-                Icon={<Image />}
-                name={`imagesUrls.${index}.image`}
-                id={"image" + id}
-                type="image"
-              />
-            ))}
-
-            {images.length <= 9 && (
-              <Button
-                type="button"
-                onClick={() => appendImage({ image: undefined })}
-                className={buttonVariants({
-                  variant: "outline",
-                  className: "w-full md:w-fit mt-2 md:mt-0",
-                })}
-              >
-                <Plus className="fill-black stroke-black" />
-              </Button>
-            )}
-          </div>
-        </div>
-
-        <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col gap-4">
-          <Label>Product Videos:</Label>
-
-          <div className="md:flex gap-4">
-            {videos.map(({ id }, index) => (
-              <RHFIileInput
-                key={id}
-                Icon={<Video />}
-                name={`videosUrls.${index}.video`}
-                id={"video" + id}
-                type="video"
-              />
-            ))}
-
-            {videos.length <= 9 && (
-              <Button
-                type="button"
-                onClick={() => appendVideos({ video: undefined })}
-                className={buttonVariants({
-                  variant: "outline",
-                  className: "w-full md:w-fit mt-2 md:mt-0",
-                })}
-              >
-                <Plus className="fill-black stroke-black" />
-              </Button>
-            )}
-          </div>
-        </div>
+        <RHFIileInput
+          multiple
+          name="videos"
+          id="videos"
+          type="video"
+          label="Select Multiple Videos:"
+        />
 
         <div className="col-span-1 md:col-span-2 lg:col-span-4">
           <Button
@@ -230,7 +150,7 @@ const ActionProduct = () => {
             Save
           </Button>
         </div>
-        <DevTool control={methods.control} />
+        {/* <DevTool control={methods.control} /> */}
       </form>
     </FormProvider>
   );

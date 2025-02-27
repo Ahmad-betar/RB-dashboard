@@ -22,9 +22,9 @@ const Product = () => {
   const { watch, setValue } = methods;
   const filters = watch();
 
+  const { data, isLoading } = getProductsQuery(filters);
   const { data: productTypes, isLoading: isProductTypesLoading } =
     getParentProductTypesQuery();
-  const { data, isLoading } = getProductsQuery(filters);
   const { mutate: deleteProduct, isPending: isDeleting } =
     deleteProductsQuery();
 
