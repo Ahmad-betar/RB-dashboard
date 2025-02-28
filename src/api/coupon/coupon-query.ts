@@ -7,12 +7,13 @@ import {
 import { add_coupon, delete_coupon, get_coupons } from "./coupon-api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { CouponFilterType } from "./type";
 
-export const getCouponsQuery = () => {
+export const getCouponsQuery = (params?: CouponFilterType) => {
   const queryResults = useQuery({
-    queryKey: ["coupons"],
+    queryKey: ["coupons", { params }],
     queryFn: async () => {
-      const data = await get_coupons();
+      const data = await get_coupons(params);
 
       return data;
     },

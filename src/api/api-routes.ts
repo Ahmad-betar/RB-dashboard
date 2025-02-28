@@ -56,6 +56,14 @@ export const API_ROUTES = {
     delete: "admin/operator/", //params
   },
 
+  cart: {
+    get: "/admin/customerCart/", //params
+    odrder: "admin/customerOrder",
+    add: "admin/customerCart",
+    remove: "admin/customerCart",
+    change: "/admin/customerChangeItemQuantity",
+  },
+
   file: {
     image: "admin/upload/images",
     video: "admin/upload/video",

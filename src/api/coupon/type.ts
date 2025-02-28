@@ -40,3 +40,10 @@ export type CouponFormValues = {
   expirationDate: Date;
   validFor: string[];
 };
+
+export interface CouponFilterType {
+  status: "expired" | "active";
+  product: string;
+  page: number;
+  limit: number;
+}

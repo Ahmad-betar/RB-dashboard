@@ -73,22 +73,23 @@ const RHFIileInput = ({
         {label && <Label>{label}</Label>}
 
         <div className="flex gap-2 w-full">
-          {file.map((file: imageType, idx: number) => (
-            <Button
-              key={idx}
-              type="button"
-              variant={"outline"}
-              style={{
-                backgroundImage: `url('${file.url}')`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                width: "100%",
-              }}
-              onClick={() => removeFile(idx)}
-            >
-              <X className="stroke-black" />
-            </Button>
-          ))}
+          {file &&
+            file.map((file: imageType, idx: number) => (
+              <Button
+                key={idx}
+                type="button"
+                variant={"outline"}
+                style={{
+                  backgroundImage: `url('${file.url}')`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  width: "100%",
+                }}
+                onClick={() => removeFile(idx)}
+              >
+                <X className="stroke-black" />
+              </Button>
+            ))}
         </div>
       </div>
     );

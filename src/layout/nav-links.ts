@@ -8,6 +8,7 @@ import {
   CircleDollarSign,
   User,
   BriefcaseBusiness,
+  ShoppingCart,
 } from "lucide-react";
 
 export const nav_links = [
@@ -42,10 +43,14 @@ export const nav_links = [
     link: "/product-type",
   },
   {
+    logo: ShoppingCart,
+    label: "Cartustomer Cart",
+    link: "/customer-cart",
+  },
+  {
     label: "State",
     logo: Building2,
     link: "/state",
-    // menu: true,
   },
   {
     logo: CircleDollarSign,

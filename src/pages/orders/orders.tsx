@@ -1,65 +1,51 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { getOrdersQuery } from "@/api/order/orders-query";
+import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/loading";
-import OrderCard from "@/components/order-card";
+import NoData from "@/components/no-data";
 import Title from "@/components/title";
+import { getOrdersQuery } from "@/api/order/orders-query";
+import RHFPagination from "@/components/rhf-pagination";
+import OrdersTable from "./orders-table";
 import OrderFilters from "./order-filters";
 import { GetOrdersParams } from "@/api/order/type";
-import NoData from "@/components/no-data";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import RHFPagination from "@/components/rhf-pagination";
 
-const Orders = () => {
+const OrdersPage = () => {
   const methods = useForm<GetOrdersParams>({
-    defaultValues: { page: 1, isUrgent: true, isPaid: true },
+    defaultValues: { page: 1, limit: 10 },
   });
-  const values = methods.watch();
+  const { watch, setValue } = methods;
+  const filters = watch();
 
-  const { data, isLoading } = getOrdersQuery({ ...values });
+  const { data, isLoading } = getOrdersQuery(filters);
 
   if (isLoading) return <LoadingSpinner />;
 
   return (
     <FormProvider {...methods}>
-      <div className="flex flex-col gap-8 p-4 sm:p-6">
-        <Title title="Orders" />
+      <div className="flex flex-col gap-4 mx-auto p-4">
+        <div className="flex justify-between items-center mb-6">
+          <Title title="Orders" />
+          <Button variant="outline">+ Add Order</Button>
+        </div>
 
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Filters</AccordionTrigger>
-            <AccordionContent className="!pb-0">
-              <OrderFilters />
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        <OrderFilters />
 
         {data?.orders.length === 0 ? (
           <NoData />
         ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {data?.orders.map((order) => (
-                <OrderCard key={order._id} order={order} />
-              ))}
-            </div>
-
-            <RHFPagination
-              page={values.page!}
-              totalPages={data?.pagination.totalPages!}
-              hasNextPage={data?.pagination.hasNextPage!}
-              hasPreviousPage={data?.pagination.currentPage! > 1}
-              onPageChange={(page) => methods.setValue("page", page)}
-            />
-          </>
+          <OrdersTable data={data?.orders || []} />
         )}
+
+        <RHFPagination
+          page={methods.watch("page")!}
+          totalPages={data?.pagination.totalPages!}
+          hasNextPage={data?.pagination.hasNextPage!}
+          hasPreviousPage={data?.pagination.currentPage! > 1}
+          onPageChange={(page) => setValue("page", page)}
+        />
       </div>
     </FormProvider>
   );
 };
 
-export default Orders;
+export default OrdersPage;

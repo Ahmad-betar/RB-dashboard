@@ -22,12 +22,16 @@ const Routes = () => {
   );
   const Operator = lazy(() => import("@/pages/operator/operators"));
   const AddOperator = lazy(() => import("@/pages/operator/add-operator"));
+  const CustomerCart = lazy(() => import("@/pages/customer-cart/cart"));
+  const AddCart = lazy(() => import("@/pages/customer-cart/add-cart"));
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <ReactRoutes>
         <Route path="/" element={<>dsfsadf</>} />
         <Route path="/customers" element={<Customers />} />
+        <Route path="/customer-cart" element={<CustomerCart />} />
+        <Route path="/add-cart" element={<AddCart />} />
         <Route path="/operators" element={<Operator />} />
         <Route path="/add-operator" element={<AddOperator />} />
         <Route path="/orders" element={<Orders />} />

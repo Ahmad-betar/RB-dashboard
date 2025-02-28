@@ -23,10 +23,10 @@ const OrderOverview = ({ order }: OrderOverviewProps) => {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">Order Overview</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <LabeledData label="Order Date" value={order?.orderId} />
+        <LabeledData label="Order ID" value={order?.orderId} />
 
         <LabeledData
-          label="Order ID"
+          label="Order Date"
           value={new Date(order?.orderDate).toLocaleDateString()}
         />
 

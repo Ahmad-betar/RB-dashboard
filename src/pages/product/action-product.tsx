@@ -21,7 +21,7 @@ import { imageType } from "@/api/uplaod-file.ts/type";
 
 const ActionProduct = () => {
   const { id } = useParams();
-  const methods = useForm<addProduct>();
+  const methods = useForm<addProduct>({});
   const [value, setValue] = useState([]);
 
   const { data, isLoading } = getOneProductsQuery(id!);
@@ -48,22 +48,24 @@ const ActionProduct = () => {
   useEffect(() => {
     const values = data?.data;
 
-    if (id) {
+    if (id && values) {
       methods.reset({
         ...values,
-        productTypeId: values?.productType._id,
+        productTypeId: values.productType._id,
+        logo: [values.logo],
       });
 
       setValue(
-        (values?.availableSizes.map((value) => ({
-          value,
-          label: value,
+        (values.availableSizes.map((size) => ({
+          value: size,
+          label: size,
         })) as any) ?? []
       );
     }
-  }, [isLoading, data, id, methods]);
+  }, [data, id, methods]);
 
   if (parentProductTypeLoading || isLoading) return <LoadingSpinner />;
+
   return (
     <FormProvider {...methods}>
       <Title title={id ? "Edit Product" : "Add Product"} />
