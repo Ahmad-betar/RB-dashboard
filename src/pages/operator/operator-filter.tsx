@@ -1,29 +1,37 @@
+import RHFAccordion from "@/components/rhf-accodion";
 import TextField from "@/components/TextField";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { useFormContext } from "react-hook-form";
 const OperatorFilter = () => {
   const { control } = useFormContext();
   return (
-    <Accordion type="single" collapsible>
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Filters</AccordionTrigger>
-        <AccordionContent className="!pb-0 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <TextField name="name" control={control} label="Name" />
+    <RHFAccordion
+      trigger="Filters"
+      content={
+        <>
+          <TextField
+            name="name"
+            control={control}
+            label="Name"
+            placeholder="Enter Name"
+          />
+
           <TextField
             type="number"
             name="phone"
             control={control}
             label="Phone"
+            placeholder="Enter Phone"
           />
-          <TextField name="email" control={control} label="Email" />
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+
+          <TextField
+            name="email"
+            control={control}
+            label="Email"
+            placeholder="Enter Email"
+          />
+        </>
+      }
+    />
   );
 };
 

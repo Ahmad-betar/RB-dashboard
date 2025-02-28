@@ -35,10 +35,8 @@ export const addOperatorQuery = () => {
       });
       navigate(-1);
     },
-    onError: () => {
-      toast("Error", {
-        description: "Failed to add the operator. Please try again.",
-      });
+    onError: (data: any) => {
+      toast(data.response.data.message);
     },
   });
 

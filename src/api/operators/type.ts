@@ -1,5 +1,7 @@
 // src/types/operator.ts
 
+import { PaginationType } from "../order/type";
+
 export interface Operator {
   _id: string;
   name: string;
@@ -10,7 +12,9 @@ export interface Operator {
 }
 
 export interface OperatorsResponse {
-  operators: Operator[];
+  count: number;
+  data: Operator[];
+  pagination: PaginationType;
 }
 
 export interface AddOperatorRequest {
@@ -24,4 +28,6 @@ export interface OperatorFilterParams {
   name: string;
   phone: string;
   email: string;
+  limit: number;
+  page: number;
 }

@@ -1,6 +1,5 @@
 import { getOperatorsQuery } from "@/api/operators/operators-query";
 import LoadingSpinner from "@/components/loading";
-import OperatorCard from "./operator-card";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
 import { Link } from "react-router-dom";
@@ -8,9 +7,13 @@ import { buttonVariants } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import { OperatorFilterParams } from "@/api/operators/type";
 import OperatorFilter from "./operator-filter";
+import OperatorTable from "./operator-table";
+import RHFPagination from "@/components/rhf-pagination";
 
 const OperatorsList = () => {
-  const methods = useForm<OperatorFilterParams>();
+  const methods = useForm<OperatorFilterParams>({
+    defaultValues: { limit: 10, page: 1 },
+  });
   const params = methods.watch();
   const { data, isLoading } = getOperatorsQuery(params);
 
@@ -28,18 +31,22 @@ const OperatorsList = () => {
         >
           + Add Operator
         </Link>
+
         <Title title="Operators" />
 
         <OperatorFilter />
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {data?.operators.length !== 0 &&
-            data?.operators.map((operator) => (
-              <OperatorCard key={operator._id} operator={operator} />
-            ))}
+        <OperatorTable data={data?.data!} />
 
-          {data?.operators.length === 0 && <NoData />}
-        </div>
+        {data?.data.length === 0 && <NoData />}
+
+        <RHFPagination
+          hasNextPage={data?.pagination.hasNextPage!}
+          hasPreviousPage={params.page !== 1}
+          page={params.page!}
+          totalPages={data?.pagination.totalPages!}
+          onPageChange={(page) => methods.setValue("page", page)}
+        />
       </div>
     </FormProvider>
   );
