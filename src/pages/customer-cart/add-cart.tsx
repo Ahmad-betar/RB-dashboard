@@ -10,13 +10,13 @@ import { addToCustomerCartType } from "@/api/cutomer-cart/type";
 import { addToCustomerCartQuery } from "@/api/cutomer-cart/customer-cart-query";
 
 const AddCart = () => {
-  const { control, handleSubmit, watch } = useForm<addToCustomerCartType>();
+  const { control, handleSubmit } = useForm<addToCustomerCartType>();
   const { data } = getProductsQuery();
   const { mutate, isPending } = addToCustomerCartQuery();
 
-  const product = watch("productId");
+//   const product = watch("productId");
 
-  const sizes = data?.data.filter(({ _id }) => product === _id)[0];
+//   const sizes = data?.data.filter(({ _id }) => product === _id)[0];
 
   const onSubmit = (data: addToCustomerCartType) => {
     console.log(data);

@@ -11,7 +11,7 @@ interface CartItemCardProps {
 }
 
 const CartItemCard = ({ item }: CartItemCardProps) => {
-  const { mutate, isPending } = changeCartItemQuery();
+  const { isPending } = changeCartItemQuery();
 
   return (
     <Card className="hover:shadow-lg transition-shadow">
