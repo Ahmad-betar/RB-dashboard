@@ -1,4 +1,9 @@
-import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   add_to_cart,
   change_item,
@@ -45,13 +50,23 @@ export const addToCustomerCartQuery = () => {
 };
 
 export const removeFromCartQuery = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: remove_cart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-customer-cart"] });
+    },
   });
 };
 
 export const changeCartItemQuery = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: change_item,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-customer-cart"] });
+    },
   });
 };

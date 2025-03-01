@@ -9,6 +9,7 @@ import {
   User,
   BriefcaseBusiness,
   ShoppingCart,
+  DollarSign,
 } from "lucide-react";
 
 export const nav_links = [
@@ -56,6 +57,11 @@ export const nav_links = [
     logo: CircleDollarSign,
     label: "Coupon",
     link: "/coupon",
+  },
+  {
+    logo: DollarSign,
+    label: "Offer",
+    link: "/offer",
   },
   {
     logo: Settings,

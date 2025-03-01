@@ -28,7 +28,7 @@ const AddCart = () => {
       <div className="flex flex-col gap-4">
         <Title title="Add Cart" />
 
-        <Card className="w-1/2 mx-auto">
+        <Card className="w-full md:w-1/2 mx-auto">
           <CardContent className="flex  flex-col gap-2">
             <RHFCombobox
               name="productId"

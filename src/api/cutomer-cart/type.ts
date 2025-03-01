@@ -44,3 +44,10 @@ export interface addToCustomerCartType {
   phone: number;
   email: string;
 }
+
+export interface changeItemCartPayload {
+  email: string;
+  phone: string;
+  itemId: string;
+  quantityChange: number;
+}

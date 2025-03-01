@@ -12,7 +12,6 @@ interface RHFTextAreaProps extends TextareaProps {
 }
 const RHFTextarea = ({
   label,
-
   labelOnRight,
   control,
   name,

@@ -9,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Landmark } from "lucide-react";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
+import LabeledData from "@/components/labeled-data";
 
 const State = () => {
   const { data, isLoading } = getStatesQuery();
@@ -28,9 +29,15 @@ const State = () => {
             ({ _id, deliveryCostPerKilo, firstKiloDeliveryCost, name }) => (
               <Card key={_id}>
                 <CardContent className="font-semibold p-4">
-                  <h2>Name: {name}</h2>
-                  <p>First Kilo Delivery Cost: {firstKiloDeliveryCost}</p>
-                  <p>Delivery Cost Per Kilo: {deliveryCostPerKilo}</p>
+                  <LabeledData label="Name" value={name} />
+                  <LabeledData
+                    label="First Kilo Delivery Cost"
+                    value={firstKiloDeliveryCost}
+                  />
+                  <LabeledData
+                    label="Delivery Cost Per Kilo"
+                    value={deliveryCostPerKilo}
+                  />
                 </CardContent>
 
                 <CardFooter className="flex justify-end gap-2">

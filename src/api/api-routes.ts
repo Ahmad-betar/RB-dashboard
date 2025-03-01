@@ -47,9 +47,11 @@ export const API_ROUTES = {
     getOne: "admin/orders/", //params
     status: "orderStatuses",
   },
+
   customers: {
     get: "admin/customers",
   },
+
   operator: {
     get: "admin/operators",
     add: "/admin/operator",
@@ -62,6 +64,15 @@ export const API_ROUTES = {
     add: "admin/customerCart",
     remove: "admin/customerCart",
     change: "/admin/customerChangeItemQuantity",
+  },
+
+  offer: {
+    get: "offers",
+    getOne: "admin/offer/", //params
+    add: "admin/offer",
+    delete: "admin/offer/", //params
+    edit: "admin/offer/", //params
+    getOfferProducts: "/admin/manageOfferProducts/",
   },
 
   file: {

@@ -11,10 +11,12 @@ const RHFCalendar = ({
   control,
   name,
   label,
+  required,
 }: {
   control: Control<any, any>;
   name: string;
   label: string;
+  required?: boolean;
 }) => {
   return (
     <Controller
@@ -33,6 +35,7 @@ const RHFCalendar = ({
             </PopoverTrigger>
             <PopoverContent>
               <Calendar
+                required={required}
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}

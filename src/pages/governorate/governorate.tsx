@@ -11,6 +11,7 @@ import { HousePlus } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import AddGovernorates from "./add-governorates";
 import Title from "@/components/title";
+import LabeledData from "@/components/labeled-data";
 
 const Governorate = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const Governorate = () => {
           data?.map(({ _id, name }) => (
             <Card key={_id}>
               <CardContent className="font-semibold p-4">
-                <h2>Name: {name}</h2>
+                <LabeledData label="Name" value={name} />
               </CardContent>
 
               <CardFooter className="flex justify-end gap-2">

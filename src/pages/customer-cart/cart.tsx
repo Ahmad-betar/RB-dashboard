@@ -37,18 +37,20 @@ const Cart = () => {
           <NoData />
         ) : (
           <>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="space-y-4">
-                {data?.data.cart.map((item) => (
-                  <CartItemCard key={item._id} item={item} />
-                ))}
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {data?.data.cart.map((item) => (
+                <CartItemCard key={item._id} item={item} />
+              ))}
             </div>
+
             {data?.data.cart.length !== 0 && !isLoading && (
               <div>
                 <CartTotal totalPrice={data?.data.totalPrice || 0} />
               </div>
             )}
+
+            <Link to={''}>
+            </Link>
           </>
         )}
       </div>

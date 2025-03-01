@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import DeleteDialog from "@/components/delete-dialog";
 import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
+import LabeledData from "@/components/labeled-data";
 
 const City = () => {
   const { GovernorateId } = useParams();
@@ -25,7 +26,7 @@ const City = () => {
           data?.map(({ _id, name }) => (
             <Card key={_id}>
               <CardContent className="font-semibold p-4">
-                <h2>Name: {name}</h2>
+                <LabeledData label="Name" value={name} />
               </CardContent>
 
               <CardFooter className="flex justify-end gap-2">
