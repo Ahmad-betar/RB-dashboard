@@ -14,6 +14,7 @@ import DeleteDialog from "@/components/delete-dialog";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { Pen } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 interface OfferCardProps {
   offer: Offer;
@@ -23,7 +24,7 @@ const OfferCard = ({ offer }: OfferCardProps) => {
   const { mutate, isPending } = deleteOfferMutation();
 
   return (
-    <Card className="hover:shadow-lg transition-shadow">
+    <Card className="flex flex-col justify-between">
       <CardHeader>
         <CardTitle className="text-lg">{offer.description}</CardTitle>
         <div className="flex items-center gap-2">
@@ -52,6 +53,7 @@ const OfferCard = ({ offer }: OfferCardProps) => {
           {/* Display Products */}
           <div className="space-y-2">
             <p className="text-sm font-medium">Products:</p>
+
             {offer.products.map((product) => (
               <div key={product._id} className="pl-4 border-l-2 border-muted">
                 <LabeledData label="Product ID:" value={product.product} />
@@ -61,6 +63,7 @@ const OfferCard = ({ offer }: OfferCardProps) => {
                   value={"$" + product.newPrice}
                 />
                 <LabeledData label="Notes:" value={product.notes} />
+                <Separator />
               </div>
             ))}
           </div>
@@ -74,6 +77,16 @@ const OfferCard = ({ offer }: OfferCardProps) => {
       </CardContent>
 
       <CardFooter className="justify-end gap-2">
+        <Link
+          to={"/offer/edit-product/" + offer._id}
+          className={buttonVariants({
+            variant: "outline",
+            className: "w-fit",
+          })}
+        >
+          <Pen /> Producs
+        </Link>
+
         <Link
           to={offer._id}
           className={buttonVariants({

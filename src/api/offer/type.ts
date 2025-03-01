@@ -62,3 +62,12 @@ export interface getOfferResponse {
   success: boolean;
   data: Data;
 }
+
+export interface editOfferPayload {
+  products?: {
+    product: string;
+    newPrice: number;
+    notes: string;
+  }[];
+  action: "add" | "remove";
+}

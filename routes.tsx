@@ -25,7 +25,9 @@ const Routes = () => {
   const CustomerCart = lazy(() => import("@/pages/customer-cart/cart"));
   const AddCart = lazy(() => import("@/pages/customer-cart/add-cart"));
   const Offer = lazy(() => import("@/pages/offer/offer"));
-  const ActionOffer = lazy(() => import("@/pages/offer/actions-offer"));
+  const AddOffer = lazy(() => import("@/pages/offer/add-offer"));
+  const EditOffer = lazy(() => import("@/pages/offer/edit-offer"));
+  const EditOfferProduct = lazy(() => import("@/pages/offer/edit-products"));
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
@@ -50,8 +52,9 @@ const Routes = () => {
         <Route path="/add-product-type" element={<AddProductType />} />
         <Route path="/product-type/:id" element={<ChildrenProductType />} />
         <Route path="/offer" element={<Offer />} />
-        <Route path="/offer/:id" element={<ActionOffer />} />
-        <Route path="/add-offer" element={<ActionOffer />} />
+        <Route path="/offer/:id" element={<EditOffer />} />
+        <Route path="/add-offer" element={<AddOffer />} />
+        <Route path="offer/edit-product/:id" element={<EditOfferProduct />} />
       </ReactRoutes>
     </Suspense>
   );

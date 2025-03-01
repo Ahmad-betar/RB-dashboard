@@ -48,9 +48,16 @@ export const edit_offer = async ({
 };
 
 // Get products for an offer
-export const get_offer_products = async (id: string) => {
-  const { data } = await axiosInstance.get(
-    API_ROUTES.offer.getOfferProducts + id
+export const manage_offer_products = async ({
+  id,
+  payload,
+}: {
+  id: string;
+  payload: any;
+}) => {
+  const { data } = await axiosInstance.put(
+    API_ROUTES.offer.manageOfferProducts + id,
+    payload
   );
   return data;
 };

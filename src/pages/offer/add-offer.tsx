@@ -8,53 +8,23 @@ import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFieldArray, useForm } from "react-hook-form";
-import {
-  addOfferMutation,
-  editOfferMutation,
-  getOfferQuery,
-} from "@/api/offer/offer-query";
-import { useParams } from "react-router-dom";
-import LoadingSpinner from "@/components/loading";
-import { useEffect } from "react";
+import { addOfferMutation } from "@/api/offer/offer-query";
 import { DevTool } from "@hookform/devtools";
 
-const ActionsOffer = () => {
-  const { id } = useParams();
+const AddOffer = () => {
   const { data: products } = getProductsQuery();
-  const { data, isLoading } = getOfferQuery(id!);
   const { mutate: Add, isPending: isAdding } = addOfferMutation();
-  const { mutate: Edit, isPending: isEditing } = editOfferMutation();
-  const { control, handleSubmit, reset } = useForm<addOfferPayload>({
+  const { control, handleSubmit } = useForm<addOfferPayload>({
     defaultValues: {
-      products: [{ product: "", newPrice: 0, notes: "" }],
-      description: "",
-      expirationDate: "",
-      numberOfProductsHaveToBuy: 0,
+      products: [{} as any],
     },
   });
 
-  const { fields, append } = useFieldArray({ name: "products", control });
+const { fields, append } = useFieldArray({ name: "products", control });
 
   const onSubmit = (data: addOfferPayload) => {
-    id ? Edit({ id, payload: data }) : Add(data);
+    Add(data);
   };
-
-  useEffect(() => {
-    const values = data?.data;
-
-    if (data && id) {
-      reset({
-        ...values,
-        products: values?.products.map(({ newPrice, notes, product }) => ({
-          notes,
-          product: product._id,
-          newPrice: Number(newPrice),
-        })),
-      });
-    }
-  }, [data, reset, id]);
-
-  if (isLoading) return <LoadingSpinner />;
 
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
@@ -103,12 +73,7 @@ const ActionsOffer = () => {
                   </Card>
                 ))}
 
-                <Button
-                  type="button"
-                  onClick={() =>
-                    append({ product: "", newPrice: 0, notes: "" })
-                  }
-                >
+                <Button type="button" onClick={() => append({} as any)}>
                   Add More Product
                 </Button>
               </CardContent>
@@ -138,7 +103,7 @@ const ActionsOffer = () => {
               placeholder="Write your offer description..."
             />
 
-            <Button type="submit" disabled={isAdding || isEditing}>
+            <Button type="submit" disabled={isAdding}>
               Submit
             </Button>
           </CardContent>
@@ -149,4 +114,4 @@ const ActionsOffer = () => {
   );
 };
 
-export default ActionsOffer;
+export default AddOffer;

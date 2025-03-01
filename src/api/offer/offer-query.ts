@@ -10,7 +10,7 @@ import {
   add_offer,
   delete_offer,
   edit_offer,
-  get_offer_products,
+  manage_offer_products,
 } from "./offer-api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -83,13 +83,15 @@ export const editOfferMutation = () => {
 };
 
 // Get products for an offer
-export const getOfferProductsQuery = (id: string) => {
-  return useQuery({
-    queryKey: ["get-offer-products", id],
-    queryFn: async () => {
-      const data = await get_offer_products(id);
-      return data;
+export const manageOfferProductsQuery = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: manage_offer_products,
+    onSuccess: () => {
+      navigate(-1);
+      queryClient.invalidateQueries({ queryKey: ["get-offers"] });
     },
-    placeholderData: keepPreviousData,
   });
 };

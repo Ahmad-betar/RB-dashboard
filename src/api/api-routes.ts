@@ -68,11 +68,11 @@ export const API_ROUTES = {
 
   offer: {
     get: "offers",
-    getOne: "admin/offer/", //params
+    getOne: "offer/", //params
     add: "admin/offer",
     delete: "admin/offer/", //params
     edit: "admin/offer/", //params
-    getOfferProducts: "/admin/manageOfferProducts/",
+    manageOfferProducts: "/admin/manageOfferProducts/",
   },
 
   file: {
