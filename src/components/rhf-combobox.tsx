@@ -28,18 +28,28 @@ interface RHFComboboxProps {
   control?: any;
   data: ComboboxItem[];
   label?: string;
+  required?: boolean; // Add this line
 }
 
-export function RHFCombobox({ name, control, data, label }: RHFComboboxProps) {
+export function RHFCombobox({
+  name,
+  control,
+  data,
+  label,
+  required,
+}: RHFComboboxProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
+      rules={{ required: required ? `${label} is required` : false }} // Add validation rules
+      render={({ field, fieldState }) => (
         <div className="flex flex-col gap-2">
-          <Label>{label}</Label>
+          <Label>
+            {label}
+          </Label>
 
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -91,6 +101,9 @@ export function RHFCombobox({ name, control, data, label }: RHFComboboxProps) {
               </Command>
             </PopoverContent>
           </Popover>
+          {fieldState.error && (
+            <span className="text-red-500">{fieldState.error.message}</span> // Display error message
+          )}
         </div>
       )}
     />

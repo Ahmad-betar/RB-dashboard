@@ -13,10 +13,6 @@ interface OrdersTableProps {
 const OrdersTable = ({ data }: OrdersTableProps) => {
   const columns: ColumnDef<OrderType>[] = [
     {
-      accessorKey: "_id",
-      header: "Order ID",
-    },
-    {
       accessorKey: "customer.name",
       header: "Customer Name",
     },

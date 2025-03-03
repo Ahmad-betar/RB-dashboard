@@ -53,4 +53,9 @@ export interface addProduct {
   logo: imageType | imageType[];
   images: imageType[];
   videos: videoType[];
+  attributes: {
+    name: string;
+    options: string[];
+    required: boolean; //Customer has to select of not
+  }[];
 }

@@ -11,19 +11,17 @@ import {
   order_customer,
   remove_cart,
 } from "./customer-cart-api";
-import { CartFiltersType } from "./type";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-export const getCustomerCartQuery = (params?: CartFiltersType) => {
+export const getCustomerCartQuery = () => {
   return useQuery({
-    queryKey: ["get-customer-cart", { ...params }],
+    queryKey: ["get-customer-cart"],
     queryFn: async () => {
-      const data = await get_carts(params);
+      const data = await get_carts();
 
       return data;
     },
-    enabled: !!params?.email || !!params?.phone,
     placeholderData: keepPreviousData,
     retry: false,
   });

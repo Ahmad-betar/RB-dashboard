@@ -1,24 +1,12 @@
+import { OrderDetailsType } from "@/api/order/type";
 import LabeledData from "@/components/labeled-data";
 import { Badge } from "@/components/ui/badge";
 
 interface OrderOverviewProps {
-  order: {
-    orderId: string;
-    orderDate: string;
-    status: string;
-    FinalCost: number;
-    deliveryCost: number;
-    isPaid: boolean;
-    isUrgent: boolean;
-    coupon?: {
-      code: string;
-      discount: number;
-      discountType: string;
-    };
-  };
+  order: OrderDetailsType;
 }
 
-const OrderOverview = ({ order }: OrderOverviewProps) => {
+const OrderProductsTable = ({ order }: OrderOverviewProps) => {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">Order Overview</h3>
@@ -54,7 +42,7 @@ const OrderOverview = ({ order }: OrderOverviewProps) => {
         {order?.coupon && (
           <LabeledData
             label="Coupon"
-            value={`${order.coupon.code} (${order.coupon.discount}% off)`}
+            value={`${order.coupon.code} (${order.coupon.discount}د.ك off)`}
           />
         )}
       </div>
@@ -62,4 +50,4 @@ const OrderOverview = ({ order }: OrderOverviewProps) => {
   );
 };
 
-export default OrderOverview;
+export default OrderProductsTable;

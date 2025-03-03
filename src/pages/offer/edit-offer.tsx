@@ -1,5 +1,4 @@
 import { editOfferMutation, getOfferQuery } from "@/api/offer/offer-query";
-import { addOfferPayload } from "@/api/offer/type";
 import LoadingSpinner from "@/components/loading";
 import RHFCalendar from "@/components/rhf-calendar";
 import RHFTextarea from "@/components/rhf-textarea";

@@ -1,5 +1,4 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
@@ -25,7 +24,6 @@ const OrdersPage = () => {
       <div className="flex flex-col gap-4 mx-auto p-4">
         <div className="flex justify-between items-center mb-6">
           <Title title="Orders" />
-          <Button variant="outline">+ Add Order</Button>
         </div>
 
         <OrderFilters />

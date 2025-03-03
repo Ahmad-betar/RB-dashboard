@@ -4,8 +4,8 @@ import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
 import { getOffersQuery } from "@/api/offer/offer-query";
-import OfferCard from "./offer-card";
 import { Link } from "react-router-dom";
+import OfferTbale from "./offer-column";
 
 const OffersPage = () => {
   const { watch, setValue } = useForm({
@@ -35,11 +35,7 @@ const OffersPage = () => {
       {data?.data.offers.length === 0 ? (
         <NoData />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data?.data.offers.map((offer) => (
-            <OfferCard key={offer._id} offer={offer} />
-          ))}
-        </div>
+        <OfferTbale offers={data?.data.offers!} />
       )}
 
       {/* Pagination */}

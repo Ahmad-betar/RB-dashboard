@@ -6,40 +6,6 @@ export type StatusType =
   | "Delivering"
   | "Completed";
 
-export interface orderType {
-  _id: string;
-  customer: {
-    _id: string;
-    name: string;
-  };
-  totalAmount: number;
-  deliveryAddress: {
-    state: {
-      _id: string;
-      name: string;
-    };
-  };
-  isUrgent: boolean;
-  status: StatusType;
-  createdAt: string;
-}
-
-export interface getOrdersType {
-  orders: orderType[];
-  pagination: {
-    totalOrders: number;
-    currentPage: number;
-    totalPages: number;
-    hasNextPage: boolean;
-  };
-}
-
-export interface CustomerType {
-  name: string;
-  email: string;
-  phone: number;
-}
-
 export interface CouponType {
   code: string;
   discount: number;
@@ -65,10 +31,15 @@ export interface ProductType {
   price: number;
   size: number;
   notes: string;
+  selectedAttributes: {
+    name: string;
+    value: string;
+  }[];
 }
 
 export interface OrderDetailsType {
   orderId: string;
+  adminNotes: string;
   customer: CustomerType;
   status: StatusType; // Ensure `StatusType` is defined elsewhere
   orderDate: Date;
@@ -88,11 +59,11 @@ export interface OrderType {
 }
 
 ////////////////////////////////////////////////////////////////
-//new
 
 export interface CustomerType {
-  _id: string;
   name: string;
+  email: string;
+  phone: number;
 }
 
 export interface StateType {
@@ -101,7 +72,14 @@ export interface StateType {
 }
 
 export interface DeliveryAddressType {
-  state: StateType;
+  area: string;
+  street: string;
+  building: {
+    number: string;
+    floor: string;
+    apartment: string;
+  };
+  notes: string;
 }
 
 export interface OrderType {
@@ -138,4 +116,8 @@ export interface GetOrdersParams {
   maxAmount?: number;
   isUrgent?: boolean;
   isPaid?: boolean;
+  name?: string;
+  phone?: number;
+  orderId?: string;
+  productTitle?: string;
 }

@@ -6,6 +6,9 @@ const Routes = () => {
   const Customers = lazy(() => import("@/pages/customer/customer"));
   const Orders = lazy(() => import("@/pages/orders/orders"));
   const Order = lazy(() => import("@/pages/orders/order-datail"));
+  const AdminOrder = lazy(
+    () => import("@/pages/customer-cart/order/admin-order")
+  );
   const State = lazy(() => import("@/pages/state/state"));
   const Governorate = lazy(() => import("@/pages/governorate/governorate"));
   const City = lazy(() => import("@/pages/city/city"));
@@ -23,6 +26,12 @@ const Routes = () => {
   const Operator = lazy(() => import("@/pages/operator/operators"));
   const AddOperator = lazy(() => import("@/pages/operator/add-operator"));
   const CustomerCart = lazy(() => import("@/pages/customer-cart/cart"));
+  const TempOrders = lazy(
+    () => import("@/pages/customer-cart/order/temp-orders")
+  );
+  const TempOrder = lazy(
+    () => import("@/pages/customer-cart/order/temp-order")
+  );
   const AddCart = lazy(() => import("@/pages/customer-cart/add-cart"));
   const Offer = lazy(() => import("@/pages/offer/offer"));
   const AddOffer = lazy(() => import("@/pages/offer/add-offer"));
@@ -34,12 +43,19 @@ const Routes = () => {
       <ReactRoutes>
         <Route path="/" element={<>dsfsadf</>} />
         <Route path="/customers" element={<Customers />} />
-        <Route path="/customer-cart" element={<CustomerCart />} />
+        <Route path="/customer-cart">
+          <Route index element={<CustomerCart />} />
+          <Route path="temp-orders">
+            <Route index element={<TempOrders />} />
+            <Route path=":id" element={<TempOrder />} />
+          </Route>
+        </Route>
         <Route path="/add-cart" element={<AddCart />} />
         <Route path="/operators" element={<Operator />} />
         <Route path="/add-operator" element={<AddOperator />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/orders/:id" element={<Order />} />
+        <Route path="/admin-order" element={<AdminOrder />} />
         <Route path="/state" element={<State />} />
         <Route path="/state/:id" element={<Governorate />} />
         <Route path="/state/:id/:GovernorateId" element={<City />} />

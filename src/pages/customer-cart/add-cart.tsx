@@ -1,4 +1,7 @@
-import { getProductsQuery } from "@/api/products/products-query";
+import {
+  getOneProductsQuery,
+  getProductsQuery,
+} from "@/api/products/products-query";
 import { RHFCombobox } from "@/components/rhf-combobox";
 import Title from "@/components/title";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,18 +11,19 @@ import RHFTextarea from "@/components/rhf-textarea";
 import { Button } from "@/components/ui/button";
 import { addToCustomerCartType } from "@/api/cutomer-cart/type";
 import { addToCustomerCartQuery } from "@/api/cutomer-cart/customer-cart-query";
+import RHFSelect from "@/components/rhf-select";
 
 const AddCart = () => {
-  const { control, handleSubmit } = useForm<addToCustomerCartType>();
+  const { control, handleSubmit, watch } = useForm<addToCustomerCartType>();
+  const productId = watch("productId");
+
   const { data } = getProductsQuery();
+  const { data: product } = getOneProductsQuery(productId);
   const { mutate, isPending } = addToCustomerCartQuery();
 
-//   const product = watch("productId");
-
-//   const sizes = data?.data.filter(({ _id }) => product === _id)[0];
+  const sizes = product?.data.availableSizes;
 
   const onSubmit = (data: addToCustomerCartType) => {
-    console.log(data);
     mutate(data);
   };
 
@@ -31,6 +35,7 @@ const AddCart = () => {
         <Card className="w-full md:w-1/2 mx-auto">
           <CardContent className="flex  flex-col gap-2">
             <RHFCombobox
+              required
               name="productId"
               control={control}
               label="Product"
@@ -42,13 +47,17 @@ const AddCart = () => {
               }
             />
 
-            <TextField
+            <RHFSelect
               required
-              type="number"
+              disabled={!sizes}
               name="size"
               control={control}
               label="Size"
               placeholder="Set Size"
+              items={
+                sizes?.map((size) => ({ label: size, value: String(size) })) ??
+                []
+              }
             />
 
             <TextField
@@ -66,23 +75,6 @@ const AddCart = () => {
               control={control}
               label="Note"
               placeholder="Add any note"
-            />
-
-            <TextField
-              required
-              type="number"
-              name="phone"
-              control={control}
-              label="Phone"
-              placeholder="Set phone"
-            />
-            <TextField
-              required
-              type="email"
-              name="email"
-              control={control}
-              label="Email"
-              placeholder="Set email"
             />
 
             <Button type="submit" disabled={isPending}>

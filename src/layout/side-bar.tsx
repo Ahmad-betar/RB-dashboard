@@ -21,7 +21,7 @@ const SideNav = () => {
 
       <DrawerContent
         className={cn(
-          "flex flex-col col-span-1 gap-8 w-64 p-5 text-white shadow-md rounded-none border-none"
+          "flex flex-col col-span-1 gap-8 w-64 p-5 text-white shadow-md rounded-none border-none overflow-auto"
         )}
       >
         <img className="w-10 h-10" src={main} alt="" />

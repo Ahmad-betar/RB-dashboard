@@ -1,11 +1,8 @@
+import { CustomerType } from "@/api/order/type";
 import LabeledData from "@/components/labeled-data";
 
 interface CustomerInfoProps {
-  customer: {
-    name: string;
-    email: string;
-    phone: number;
-  };
+  customer: CustomerType;
 }
 
 const CustomerInfo = ({ customer }: CustomerInfoProps) => {

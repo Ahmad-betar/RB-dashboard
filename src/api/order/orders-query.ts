@@ -11,6 +11,7 @@ export const getOrdersQuery = (params?: GetOrdersParams) => {
       return data;
     },
     placeholderData: keepPreviousData,
+    retry: false,
   });
 };
 

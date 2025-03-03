@@ -1,19 +1,47 @@
 import { useFormContext } from "react-hook-form";
-
 import RHFCalendar from "@/components/rhf-calendar";
 import TextField from "@/components/TextField";
-import RHFCheckbox from "@/components/rhf-checkbox";
 import RHFAccordion from "@/components/rhf-accodion";
+import { GetOrdersParams } from "@/api/order/type";
+// import RHFCheckbox from "@/components/rhf-checkbox";
 
 const OrderFilters = () => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<GetOrdersParams>();
 
   return (
     <RHFAccordion
       trigger="Filters"
       content={
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+          <>
+            <TextField
+              control={control}
+              name="name"
+              label="Name"
+              placeholder="Enter a Name"
+            />
+
+            <TextField
+              control={control}
+              name="phone"
+              label="Phone Number"
+              placeholder="Enter a Phone Number"
+            />
+
+            <TextField
+              control={control}
+              name="orderId"
+              label="Order ID"
+              placeholder="Enter a Order ID"
+            />
+
+            <TextField
+              control={control}
+              name="productTitle"
+              label="Product Title"
+              placeholder="Enter a Product Title"
+            />
+
             <RHFCalendar
               name="startDate"
               control={control}
@@ -22,7 +50,7 @@ const OrderFilters = () => {
 
             <RHFCalendar name="endDate" control={control} label="End Date" />
 
-            <TextField
+            {/* <TextField
               type="number"
               control={control}
               label="Min Amount"
@@ -44,10 +72,10 @@ const OrderFilters = () => {
               control={control}
               name="isUrgent"
               label="Urgent Orders"
-            />
+            /> */}
 
-            <RHFCheckbox control={control} name="isPaid" label="Paid Orders" />
-          </div>
+            {/* <RHFCheckbox control={control} name="isPaid" label="Paid Orders" /> */}
+          </>
         </>
       }
     />

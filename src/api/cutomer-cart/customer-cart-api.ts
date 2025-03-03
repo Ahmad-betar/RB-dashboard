@@ -2,14 +2,13 @@ import { API_ROUTES } from "../api-routes";
 import { axiosInstance } from "../axios";
 import {
   addToCustomerCartType,
-  CartFiltersType,
   CartResponse,
   changeItemCartPayload,
 } from "./type";
 
-export const get_carts = async (params?: CartFiltersType) => {
+export const get_carts = async () => {
   const { data } = await axiosInstance.get<CartResponse>(API_ROUTES.cart.get, {
-    params,
+    // params,
   });
 
   return data;

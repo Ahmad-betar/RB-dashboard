@@ -1,6 +1,5 @@
 import axsio from "axios";
 
-export const BASE_URL = "https://commonsensesqaure.pythonanywhere.com/";
 export const API_BASE_URL = "https://rb-o8z2.onrender.com/";
 
 export const axiosInstance = axsio.create({
@@ -14,7 +13,7 @@ export const axiosInstance = axsio.create({
 axiosInstance.interceptors.request.use((config) => {
   // config.headers.Authorization = "Bearer " + localStorage.getItem("token");
   config.headers.Authorization =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11aGFtbWFkay5oMS4xLjIwMDFAZ21haWwuY29tIiwidXNlcklkIjoiNjc5Mzg2MzU5MzM3MzRhNzA1NDdjZjIyIiwiaWF0IjoxNzM5MjIzNDE1LCJleHAiOjE3NDE4MTU0MTV9.KsKv1WxKHSrwblD6_BUpPemFKvoXO7IHs_MvQ89Chx4";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11aGFtbWFkay5oMS4xLjIwMDFAZ21haWwuY29tIiwidXNlcklkIjoiNjdjMzYwOGIwN2Q5NjVjNjUzNDMyY2RlIiwiaWF0IjoxNzQwODczMTQ0LCJleHAiOjE3NDM0NjUxNDR9.h_ItAiOIMbM_8QlDJsopI2VAd4m7CVzo8DSs4HsboIE";
 
   return config;
 });

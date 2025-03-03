@@ -1,13 +1,13 @@
-import { deleteCouponQuery, getCouponsQuery } from "@/api/coupon/coupon-query";
+import { getCouponsQuery } from "@/api/coupon/coupon-query";
 import LoadingSpinner from "@/components/loading";
 import Title from "@/components/title";
-import CouponCard from "./coupon-card";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import CouponFilter from "./coupon-filter";
 import { CouponFilterType } from "@/api/coupon/type";
 import RHFPagination from "@/components/rhf-pagination";
+import CouponTable from "./coupon-table";
 
 const Coupon = () => {
   const methods = useForm<CouponFilterType>({
@@ -20,11 +20,6 @@ const Coupon = () => {
     ...values,
     status: status ? "active" : "expired",
   });
-
-  const { mutate, isPending } = deleteCouponQuery();
-  const handleDelete = (id: string) => {
-    mutate(id);
-  };
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -45,16 +40,7 @@ const Coupon = () => {
 
         <CouponFilter />
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {data?.data.map((coupon) => (
-            <CouponCard
-              key={coupon._id}
-              coupon={coupon}
-              onDelete={handleDelete}
-              isDeleting={isPending}
-            />
-          ))}
-        </div>
+        <CouponTable data={data?.data!} />
 
         <RHFPagination
           hasNextPage={false}

@@ -45,7 +45,7 @@ export const nav_links = [
   },
   {
     logo: ShoppingCart,
-    label: "Cartustomer Cart",
+    label: "Cart",
     link: "/customer-cart",
   },
   {

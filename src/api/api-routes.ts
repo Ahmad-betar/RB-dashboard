@@ -59,11 +59,14 @@ export const API_ROUTES = {
   },
 
   cart: {
-    get: "/admin/customerCart/", //params
+    get: "/admin/cart",
     odrder: "admin/customerOrder",
-    add: "admin/customerCart",
-    remove: "admin/customerCart",
-    change: "/admin/customerChangeItemQuantity",
+    add: "admin/cart",
+    remove: "admin/cart",
+    change: "admin/changeItemQuantity",
+    createOrder: "admin/tempOrder",
+    getOrders: "/admin/tempOrders",
+    getOneOrder: "admin/tempOrder/", //param
   },
 
   offer: {

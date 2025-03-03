@@ -8,15 +8,15 @@ import OrderOverview from "./order-overview";
 import CustomerInfo from "./cutomer-info";
 import DeliveryAddress from "./delivery-address";
 import OrderNotes from "./order-notes";
-import ProductList from "./product-list";
+import OrderProductsTable from "./order-products-table";
 
 const Order = () => {
   const { id } = useParams();
   const { data, isLoading } = getOneOrderQuery(id!);
 
-  if (isLoading) return <LoadingSpinner />;
-
   const order = data?.order;
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col gap-8 p-4 sm:p-6">
@@ -27,15 +27,26 @@ const Order = () => {
           <CardTitle>Order Information</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <OrderOverview order={order} />
+          <OrderOverview order={order!} />
+
           <Separator />
-          <CustomerInfo customer={order?.customer} />
+
+          <CustomerInfo customer={order?.customer!} />
+
           <Separator />
-          <DeliveryAddress address={order?.deliveryAddress} />
+
+          <DeliveryAddress address={order?.deliveryAddress!} />
+
           <Separator />
-          <OrderNotes notes={order?.orderNotes} />
+
+          <OrderNotes
+            orderNotes={order?.orderNotes!}
+            adminNotes={order?.adminNotes!}
+          />
+
           <Separator />
-          <ProductList products={order?.products} />
+
+          <OrderProductsTable products={order?.products!} />
         </CardContent>
       </Card>
     </div>

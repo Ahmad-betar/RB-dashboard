@@ -1,12 +1,23 @@
 import LabeledData from "@/components/labeled-data";
 
 interface OrderNotesProps {
-  notes: string;
+  orderNotes: string;
+  adminNotes: string;
 }
 
-const OrderNotes = ({ notes }: OrderNotesProps) => {
+const OrderNotes = ({ orderNotes, adminNotes }: OrderNotesProps) => {
   return (
-    <LabeledData label="Order Notes" value={notes || "No notes provided."} />
+    <>
+      <LabeledData
+        label="Order Notes"
+        value={orderNotes || "No notes provided."}
+      />
+
+      <LabeledData
+        label="Admin Notes"
+        value={adminNotes || "No notes provided."}
+      />
+    </>
   );
 };
 

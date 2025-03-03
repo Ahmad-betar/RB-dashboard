@@ -5,15 +5,12 @@ import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
-import {
-  getProductsQuery,
-  deleteProductsQuery,
-} from "@/api/products/products-query";
+import { getProductsQuery } from "@/api/products/products-query";
 import { getParentProductTypesQuery } from "@/api/product-type/product-type-query";
 import ProductFilters from "./product-filters";
-import ProductGrid from "./product-grid";
 import { getProductParams } from "@/api/products/type";
 import RHFPagination from "@/components/rhf-pagination";
+import ProductsTable from "./product-table";
 
 const Product = () => {
   const methods = useForm<getProductParams>({
@@ -25,8 +22,6 @@ const Product = () => {
   const { data, isLoading } = getProductsQuery(filters);
   const { data: productTypes, isLoading: isProductTypesLoading } =
     getParentProductTypesQuery();
-  const { mutate: deleteProduct, isPending: isDeleting } =
-    deleteProductsQuery();
 
   useEffect(() => {
     setValue("page", 1);
@@ -50,11 +45,8 @@ const Product = () => {
           <NoData />
         ) : (
           <>
-            <ProductGrid
-              products={data?.data || []}
-              onDelete={(id) => deleteProduct(id)}
-              isDeleting={isDeleting}
-            />
+            <ProductsTable data={data?.data!} />
+
             <RHFPagination
               page={filters.page}
               totalPages={data?.totalPages || 1}

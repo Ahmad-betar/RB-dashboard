@@ -21,6 +21,7 @@ const RHFCheckbox = ({
       render={({ field }) => (
         <div className={cn("flex gap-2", className)}>
           <Checkbox
+            defaultChecked
             id={name}
             {...field}
             checked={field.value}

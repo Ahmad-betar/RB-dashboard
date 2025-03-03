@@ -25,10 +25,7 @@ export const get_one_product = async (id: string) => {
 };
 
 export const add_products = async (body: addProduct) => {
-  const { data } = await axiosInstance.post<addProduct>(
-    API_ROUTES.product.create,
-    body
-  );
+  const { data } = await axiosInstance.post(API_ROUTES.product.create, body);
 
   return data;
 };

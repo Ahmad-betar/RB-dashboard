@@ -1,22 +1,22 @@
+import { imageType } from "../uplaod-file.ts/type";
+
+export interface NameID {
+  _id: string;
+  name: string;
+}
+
 export interface CartItem {
   product: {
     _id: string;
     title: string;
-    price: number;
-    images: {
-      url: string;
-      publicId: string;
-      _id: string;
-    }[];
+    images: imageType[];
     productType: {
       _id: string;
       name: string;
-      parentProductType: {
-        _id: string;
-        name: string;
-      } | null;
+      parentProductType?: NameID;
     };
   };
+  price: number;
   size: number;
   quantity: number;
   notes: string;
@@ -24,7 +24,7 @@ export interface CartItem {
 }
 
 export interface CartResponse {
-  success: boolean;
+  success: true;
   data: {
     cart: CartItem[];
     totalPrice: number;
@@ -41,13 +41,9 @@ export interface addToCustomerCartType {
   size: number;
   quantity: number;
   notes: string;
-  phone: number;
-  email: string;
 }
 
 export interface changeItemCartPayload {
-  email: string;
-  phone: string;
   itemId: string;
   quantityChange: number;
 }
