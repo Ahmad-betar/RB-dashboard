@@ -21,11 +21,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import MultiTagInput from "@/components/rhf-multi-tag-input";
 import RHFCheckbox from "@/components/rhf-checkbox";
 import { imageType } from "@/api/uplaod-file.ts/type";
+import { X } from "lucide-react";
 
 const ActionProduct = () => {
   const { id } = useParams();
   const methods = useForm<addProduct>({});
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: methods.control,
     name: "attributes",
     rules: { required: true },
@@ -92,14 +93,14 @@ const ActionProduct = () => {
               label="Description"
               placeholder="Enter Description"
             />
-            <TextField
+            {/* <TextField
               required
               type="number"
               name="weight"
               control={methods.control}
               label="Weight"
               placeholder="Enter Weight"
-            />
+            /> */}
             <TextField
               required
               type="number"
@@ -107,6 +108,16 @@ const ActionProduct = () => {
               control={methods.control}
               label="Price"
               placeholder="Enter Price"
+            />
+            <RHFTextarea
+              required
+              name="notes"
+              control={methods.control}
+              label="Additional Info"
+              placeholder="Enter Additional Info"
+              defaultValue={
+                "اذا كان القياس XL فـ اكثر الرجاء الكتابه في الملاحظات"
+              }
             />
             <RHFSelect
               required
@@ -129,6 +140,7 @@ const ActionProduct = () => {
           label="Available Sizes"
         /> */}
             <MultiTagInput
+              type="number"
               control={methods.control}
               name={`availableSizes`}
               label="Available Sizes"
@@ -163,7 +175,11 @@ const ActionProduct = () => {
               <div className="flex flex-col gap-2">
                 {fields.map((_, index) => (
                   <Card>
-                    <CardContent className="flex flex-col gap-2">
+                    <CardContent className="flex flex-col gap-2 relative">
+                      <X
+                        className="absolute top-1 right-1 cursor-pointer"
+                        onClick={() => remove(index)}
+                      />
                       <TextField
                         name={`attributes.${index}.name`}
                         control={methods.control}

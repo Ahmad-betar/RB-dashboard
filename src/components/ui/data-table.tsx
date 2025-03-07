@@ -13,21 +13,37 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useEffect, useState } from "react"; // Import useState to manage row selection
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  getData?: (data: any) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  getData,
 }: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = useState({});
+
   const table = useReactTable({
     data,
     columns,
+    state: {
+      rowSelection,
+    },
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
+    enableRowSelection: true,
   });
+
+  // const selectedRows = table.getSelectedRowModel().rows;
+
+  useEffect(() => {
+    getData && getData(table);
+  }, [rowSelection]);
 
   return (
     <div className="rounded-md border">
@@ -56,6 +72,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className={row.getIsSelected() ? "bg-gray-100" : ""} // Change background color if selected
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

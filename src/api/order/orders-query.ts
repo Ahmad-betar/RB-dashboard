@@ -1,5 +1,15 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { get_one_order, get_orders, get_status } from "./orders-api";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
+  change_order_status,
+  get_one_order,
+  get_orders,
+  get_status,
+} from "./orders-api";
 import { GetOrdersParams } from "./type";
 
 export const getOrdersQuery = (params?: GetOrdersParams) => {
@@ -36,5 +46,16 @@ export const getStatusQuery = () => {
       return data;
     },
     placeholderData: keepPreviousData,
+  });
+};
+
+export const changeOrderStatusMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: change_order_status,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-orders"] });
+    },
   });
 };

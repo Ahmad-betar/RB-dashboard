@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useController, UseControllerProps } from "react-hook-form";
 import { Input } from "@/components/ui/input"; // shadcn Input component
 import { Label } from "@/components/ui/label"; // shadcn Label component
 import { X } from "lucide-react"; // Icon for removing values
+import { Button } from "./ui/button";
 
 interface MultiTagInputProps extends UseControllerProps {
   control: any; // React Hook Form control
   name: string; // Field name
   label: string; // Label for the input
+  type?: string;
 }
 
-const MultiTagInput = ({ control, name, label }: MultiTagInputProps) => {
+const MultiTagInput = ({ control, name, label, type }: MultiTagInputProps) => {
   const {
     field: { value = [], onChange },
   } = useController({
@@ -22,9 +24,20 @@ const MultiTagInput = ({ control, name, label }: MultiTagInputProps) => {
   const [inputValue, setInputValue] = useState("");
 
   // Save the input value when the input loses focus (onBlur)
-  const handleBlur = () => {
-    if (inputValue.trim() && !value.includes(inputValue.trim())) {
-      onChange([...value, inputValue.trim()]); // Update React Hook Form value
+  const addHandler = () => {
+    var InputValue: number | string = inputValue.trim();
+
+    if (type === "number") {
+      InputValue = Number(InputValue);
+    }
+
+    if (value.includes(InputValue)) {
+      setInputValue("");
+      return;
+    }
+
+    if (inputValue.trim()) {
+      onChange([...value, InputValue]); // Update React Hook Form value
       setInputValue(""); // Clear input
     }
   };
@@ -44,7 +57,7 @@ const MultiTagInput = ({ control, name, label }: MultiTagInputProps) => {
           {value.map((value: string, index: number) => (
             <div
               key={index}
-              className="flex items-center px-2 py-1 m-1 text-white bg-black rounded-full"
+              className="flex items-center px-1 py-0.5 m-1 text-white bg-black rounded-sm text-sm"
             >
               {value}
               <button
@@ -59,14 +72,24 @@ const MultiTagInput = ({ control, name, label }: MultiTagInputProps) => {
         </div>
 
         {/* Input field */}
-        <Input
-          type={"text"}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onBlur={handleBlur} // Save value on blur
-          className="flex-1 p-1 m-1 border-none outline-none"
-          placeholder="Add a value"
-        />
+        <div className="w-full border flex rounded-md shadow-sm">
+          <Input
+            type={type || "text"}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onBlur={addHandler} // Save value on blur
+            className="border-none shadow-none rounded-none focus-visible:ring-0 rounded-l-md"
+            placeholder="Add a value"
+          />
+          <Button
+            variant={"outline"}
+            className="border-none rounded-none shadow-none"
+            onClick={addHandler}
+            type="button"
+          >
+            + Add
+          </Button>
+        </div>
       </div>
     </div>
   );

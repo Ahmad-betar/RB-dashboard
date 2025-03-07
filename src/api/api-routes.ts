@@ -46,6 +46,7 @@ export const API_ROUTES = {
     get: "admin/orders",
     getOne: "admin/orders/", //params
     status: "orderStatuses",
+    changeStatus: "admin/order/", //params
   },
 
   customers: {

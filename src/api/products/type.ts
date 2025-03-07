@@ -48,6 +48,7 @@ export interface addProduct {
   description: string;
   weight: number;
   price: number;
+  notes: string;
   productTypeId: string;
   availableSizes: string[];
   logo: imageType | imageType[];

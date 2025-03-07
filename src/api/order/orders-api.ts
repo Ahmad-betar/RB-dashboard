@@ -24,3 +24,20 @@ export const get_status = async () => {
 
   return data;
 };
+
+export const change_order_status = async ({
+  id,
+  payload,
+}: {
+  id: string;
+  payload: any;
+}) => {
+  const { data } = await axiosInstance.put(
+    API_ROUTES.orders.changeStatus + id,
+    {
+      status: payload,
+    }
+  );
+
+  return data;
+};
