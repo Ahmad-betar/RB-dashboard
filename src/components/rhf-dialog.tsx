@@ -1,13 +1,16 @@
 import { ReactNode } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 const RhfDialog = ({
   content,
   trigger,
+  className,
 }: {
   content: ReactNode;
   trigger: ReactNode;
+  className?: string;
 }) => {
   return (
     <Dialog>
@@ -16,7 +19,7 @@ const RhfDialog = ({
           {trigger}
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex justify-center h-[80%]">
+      <DialogContent className={cn("flex justify-center h-[80%]", className)}>
         {content}
       </DialogContent>
     </Dialog>

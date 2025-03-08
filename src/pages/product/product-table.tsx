@@ -17,10 +17,10 @@ const ProductsTable = ({ data }: { data: ProductType[] }) => {
       accessorKey: "title",
       header: "Product Name",
     },
-    {
-      accessorKey: "description",
-      header: "Product Description",
-    },
+    // {
+    //   accessorKey: "description",
+    //   header: "Product Description",
+    // },
     {
       accessorKey: "price",
       header: "Product Price",
@@ -58,30 +58,30 @@ const ProductsTable = ({ data }: { data: ProductType[] }) => {
         />
       ),
     },
-    {
-      accessorKey: "images",
-      header: "Images",
-      cell: ({ row }) => (
-        <div className="flex gap-2">
-          {row.original.images.map(({ url }) => (
-            <RhfDialog
-              trigger={
-                <img
-                  src={url}
-                  className="w-full h-full object-cover rounded-sm"
-                />
-              }
-              content={
-                <img
-                  src={url}
-                  className="w-full h-full object-contain rounded-lg"
-                />
-              }
-            />
-          ))}
-        </div>
-      ),
-    },
+    // {
+    //   accessorKey: "images",
+    //   header: "Images",
+    //   cell: ({ row }) => (
+    //     <div className="flex gap-2">
+    //       {row.original.images.map(({ url }) => (
+    //         <RhfDialog
+    //           trigger={
+    //             <img
+    //               src={url}
+    //               className="w-full h-full object-cover rounded-sm"
+    //             />
+    //           }
+    //           content={
+    //             <img
+    //               src={url}
+    //               className="w-full h-full object-contain rounded-lg"
+    //             />
+    //           }
+    //         />
+    //       ))}
+    //     </div>
+    //   ),
+    // },
     {
       accessorKey: "videos",
       header: "Videos",

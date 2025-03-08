@@ -16,6 +16,7 @@ interface RHFInputFileProps extends InputProps {
   id: string;
   label?: string;
   type: "image" | "video";
+  className?: string;
 }
 
 const RHFIileInput = ({
@@ -23,6 +24,7 @@ const RHFIileInput = ({
   name,
   label,
   type,
+  className,
   ...props
 }: RHFInputFileProps) => {
   const { mutate: addImage, isPending: isAddingImage } = uploadImageQuery();

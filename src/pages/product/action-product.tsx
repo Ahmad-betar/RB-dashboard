@@ -1,4 +1,7 @@
-import { getParentProductTypesQuery } from "@/api/product-type/product-type-query";
+import {
+  getChildrenProductTypes,
+  getParentProductTypesQuery,
+} from "@/api/product-type/product-type-query";
 import { addProduct } from "@/api/products/type";
 import RHFIileInput from "@/components/rhf-file-input";
 import LoadingSpinner from "@/components/loading";
@@ -20,8 +23,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import MultiTagInput from "@/components/rhf-multi-tag-input";
 import RHFCheckbox from "@/components/rhf-checkbox";
-import { imageType } from "@/api/uplaod-file.ts/type";
 import { X } from "lucide-react";
+import { imageType } from "@/api/uplaod-file.ts/type";
 
 const ActionProduct = () => {
   const { id } = useParams();
@@ -29,28 +32,45 @@ const ActionProduct = () => {
   const { fields, append, remove } = useFieldArray({
     control: methods.control,
     name: "attributes",
-    rules: { required: true },
+    // rules: { required: true },
   });
+  const parentProductTypeValue = methods.watch("productTypeId");
 
   const { data, isLoading } = getOneProductsQuery(id!);
   const { data: parentProducType, isLoading: parentProductTypeLoading } =
     getParentProductTypesQuery();
+
+  const { data: childrenProductType } = getChildrenProductTypes(
+    parentProductTypeValue
+  );
+
   const { mutate: add, isPending: isAdding } = addProductsQuery();
   const { mutate: edit, isPending: isEditing } = editProductsQuery();
 
-  const submitHandler = (data: addProduct) => {
-    console.log(data);
+  const submitHandler = (data: any) => {
+    var productTypeId = data.productTypeId;
+
+    if (data.childrenProductTypeId) {
+      productTypeId = data.childrenProductTypeId;
+
+      delete data.childrenProductTypeId;
+    }
+
+    delete data.productType;
+
 
     id
       ? edit({
           id,
           params: {
             ...data,
+            productTypeId,
             logo: (data.logo as imageType[])[0],
           },
         })
       : add({
           ...data,
+          productTypeId,
           logo: (data.logo as imageType[])[0],
         });
   };
@@ -93,14 +113,14 @@ const ActionProduct = () => {
               label="Description"
               placeholder="Enter Description"
             />
-            {/* <TextField
+            <TextField
               required
               type="number"
               name="weight"
               control={methods.control}
               label="Weight"
               placeholder="Enter Weight"
-            /> */}
+            />
             <TextField
               required
               type="number"
@@ -125,6 +145,19 @@ const ActionProduct = () => {
               control={methods.control}
               items={
                 parentProducType?.productTypes.map(({ _id, name }) => ({
+                  label: name,
+                  value: _id,
+                })) ?? []
+              }
+              placeholder="Enter Product Type"
+              label="Product Type"
+            />
+
+            <RHFSelect
+              name="childrenProductTypeId"
+              control={methods.control}
+              items={
+                childrenProductType?.productTypes.map(({ _id, name }) => ({
                   label: name,
                   value: _id,
                 })) ?? []

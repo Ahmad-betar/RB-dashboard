@@ -37,6 +37,9 @@ const Routes = () => {
   const AddOffer = lazy(() => import("@/pages/offer/add-offer"));
   const EditOffer = lazy(() => import("@/pages/offer/edit-offer"));
   const EditOfferProduct = lazy(() => import("@/pages/offer/edit-products"));
+  const Banner = lazy(() => import("@/pages/banner/banner"));
+  const Popular = lazy(() => import("@/pages/popular/popular"));
+  const AddPopular = lazy(() => import("@/pages/popular/add-popular"));
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
@@ -71,6 +74,9 @@ const Routes = () => {
         <Route path="/offer/:id" element={<EditOffer />} />
         <Route path="/add-offer" element={<AddOffer />} />
         <Route path="offer/edit-product/:id" element={<EditOfferProduct />} />
+        <Route path="/banner" index element={<Banner />} />
+        <Route path="/popular" element={<Popular />} />
+        <Route path="/add-popular" element={<AddPopular />} />
       </ReactRoutes>
     </Suspense>
   );

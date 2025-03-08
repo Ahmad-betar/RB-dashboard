@@ -79,6 +79,17 @@ export const API_ROUTES = {
     manageOfferProducts: "/admin/manageOfferProducts/",
   },
 
+  banner: {
+    get: "banner",
+    add: "admin/banner",
+  },
+
+  popular: {
+    get: "populars",
+    add: "admin/popular",
+    delete: "admin/popular", //param
+  },
+
   file: {
     image: "admin/upload/images",
     video: "admin/upload/video",

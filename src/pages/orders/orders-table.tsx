@@ -68,7 +68,9 @@ const OrdersTable = ({ data }: OrdersTableProps) => {
       accessorKey: "status",
       header: "Status",
       cell: ({ row }) => (
-        <Badge variant={"outline"}>{row.original.status}</Badge>
+        <Badge variant={row.original.status as any}>
+          {row.original.status}
+        </Badge>
       ),
     },
     {

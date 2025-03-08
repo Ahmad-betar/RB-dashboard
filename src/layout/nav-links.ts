@@ -10,6 +10,8 @@ import {
   BriefcaseBusiness,
   ShoppingCart,
   DollarSign,
+  TvMinimal,
+  ChartColumnBig,
 } from "lucide-react";
 
 export const nav_links = [
@@ -40,7 +42,7 @@ export const nav_links = [
   },
   {
     logo: PackageSearch, // Use the MessageCircle icon for Comments
-    label: "Product Type",
+    label: "Category",
     link: "/product-type",
   },
   {
@@ -62,6 +64,16 @@ export const nav_links = [
     logo: DollarSign,
     label: "Offer",
     link: "/offer",
+  },
+  {
+    logo: TvMinimal,
+    label: "Banner",
+    link: "/banner",
+  },
+  {
+    logo: ChartColumnBig,
+    label: "Popular",
+    link: "/popular",
   },
   {
     logo: Settings,
