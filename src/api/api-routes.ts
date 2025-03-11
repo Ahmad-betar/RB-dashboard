@@ -91,7 +91,11 @@ export const API_ROUTES = {
   },
 
   file: {
-    image: "admin/upload/images",
+    image: "admin/upload/image",
     video: "admin/upload/video",
+  },
+
+  message: {
+    add: "admin/messages",
   },
 };

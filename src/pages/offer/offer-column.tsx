@@ -1,21 +1,17 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Offer } from "@/api/offer/type";
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
-import { Pen } from "lucide-react";
+import { Eye, Pen } from "lucide-react";
 import DeleteDialog from "@/components/delete-dialog";
 import { deleteOfferMutation } from "@/api/offer/offer-query";
 import { DataTable } from "@/components/ui/data-table";
+import RhfDialog from "@/components/rhf-dialog";
 
 const OfferTbale = ({ offers }: { offers: Offer[] }) => {
   const { mutate, isPending } = deleteOfferMutation();
 
   const offerColumns: ColumnDef<Offer>[] = [
-    {
-      accessorKey: "_id",
-      header: "Offer ID",
-    },
     {
       accessorKey: "description",
       header: "Description",
@@ -23,16 +19,27 @@ const OfferTbale = ({ offers }: { offers: Offer[] }) => {
     {
       accessorKey: "expirationDate",
       header: "Expiration Date",
-      cell: ({ row }) => format(new Date(row.original.expirationDate), "PPP"),
+      cell: ({ row }) =>
+        new Date(row.original.expirationDate).toLocaleDateString(),
     },
     {
       accessorKey: "numberOfProductsHaveToBuy",
       header: "Number Of Products Have To Buy",
     },
     {
+      accessorKey: "image",
+      header: "image",
+      cell: ({ row }) => (
+        <RhfDialog
+          content={<img className={row.original.image?.url} />}
+          trigger={<img className={row.original.image?.url} />}
+        />
+      ),
+    },
+    {
       accessorKey: "createdAt",
       header: "Created At",
-      cell: ({ row }) => format(new Date(row.original.createdAt), "PPP"),
+      cell: ({ row }) => new Date(row.original.createdAt).toLocaleDateString(),
     },
     {
       accessorKey: "actions",
@@ -58,6 +65,17 @@ const OfferTbale = ({ offers }: { offers: Offer[] }) => {
           >
             <Pen />
           </Link>
+
+          <Link
+            to={"view/" + row.original._id}
+            className={buttonVariants({
+              variant: "outline",
+              className: "w-fit",
+            })}
+          >
+            <Eye />
+          </Link>
+
           <DeleteDialog
             deleteFn={mutate}
             id={row.original._id}

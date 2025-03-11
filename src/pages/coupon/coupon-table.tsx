@@ -66,11 +66,11 @@ const CouponTable = ({ data }: { data: couponType[] }) => {
         </div>
       ),
     },
-    {
-      accessorKey: "createdAt",
-      header: "Created At",
-      cell: ({ row }) => format(new Date(row.original.createdAt), "PPP"),
-    },
+    // {
+    //   accessorKey: "createdAt",
+    //   header: "Created At",
+    //   cell: ({ row }) => format(new Date(row.original.createdAt), "PPP"),
+    // },
     {
       accessorKey: "Action",
       header: "Action",

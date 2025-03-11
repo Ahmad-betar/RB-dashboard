@@ -30,9 +30,9 @@ const OrdersTable = ({ data }: OrdersTableProps) => {
       Table?.map((row: any) =>
         mutate({ id: row.original._id, payload: watch("status") })
       );
-    }
 
-    setValue("status", undefined);
+      setValue("status", null);
+    }
   }, [watch("status")]);
 
   const columns: ColumnDef<OrderType>[] = [
@@ -105,7 +105,7 @@ const OrdersTable = ({ data }: OrdersTableProps) => {
               control={control}
               placeholder="Change Order Status"
               items={[
-                { label: "Pending", value: "Pending" },
+                // { label: "Pending", value: "Pending" },
                 { label: "Processing", value: "Processing" },
                 { label: "Cut", value: "Cut" },
                 { label: "Sewn", value: "Sewn" },

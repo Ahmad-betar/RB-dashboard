@@ -1,4 +1,5 @@
 import { ProductType } from "../products/type";
+import { imageType } from "../uplaod-file.ts/type";
 
 export interface OfferProduct {
   product: string;
@@ -11,6 +12,7 @@ export interface Offer {
   _id: string;
   description: string;
   products: OfferProduct[];
+  image: imageType;
   expirationDate: string;
   numberOfProductsHaveToBuy: number;
   createdAt: string;

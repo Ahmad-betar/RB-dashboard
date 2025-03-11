@@ -20,7 +20,7 @@ const OrderProductsTable = ({ order }: OrderOverviewProps) => {
 
         <div>
           <p className="text-sm text-muted-foreground">Status</p>
-          <Badge variant="outline">{order?.status}</Badge>
+          <Badge variant={order.status}>{order?.status}</Badge>
         </div>
 
         <LabeledData label="Total Cost" value={"$" + order?.FinalCost} />

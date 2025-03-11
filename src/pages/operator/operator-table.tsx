@@ -12,10 +12,10 @@ const OperatorTable = ({ data }: OperatorTableProps) => {
   const { mutate, isPending } = deleteOperatorQuery();
 
   const columns: ColumnDef<Operator>[] = [
-    {
-      accessorKey: "_id",
-      header: "Operator ID",
-    },
+    // {
+    //   accessorKey: "_id",
+    //   header: "Operator ID",
+    // },
     {
       accessorKey: "name",
       header: "Operator Name",

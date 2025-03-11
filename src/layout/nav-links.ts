@@ -12,6 +12,7 @@ import {
   DollarSign,
   TvMinimal,
   ChartColumnBig,
+  MessageCircleMore,
 } from "lucide-react";
 
 export const nav_links = [
@@ -76,8 +77,8 @@ export const nav_links = [
     link: "/popular",
   },
   {
-    logo: Settings,
-    label: "Settings",
-    link: "/settings",
+    logo: MessageCircleMore,
+    label: "Messages",
+    link: "/messages",
   },
 ];
