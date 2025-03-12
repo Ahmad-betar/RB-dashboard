@@ -98,4 +98,17 @@ export const API_ROUTES = {
   message: {
     add: "admin/messages",
   },
+
+  imageSize: {
+    get: "sizesImage",
+    add: "admin/sizesImage",
+  },
+
+  satistics: {
+    productsStatistics: "admin/productsSatistics",
+    customersStatistics: "admin/customersSatistics",
+    salesStatistics: "admin/salesSatistics",
+    dailyRevenueStatistics: "admin/dailyRevenueSatistics",
+    offerStatistics: "admin/offerSatistics",
+  },
 };

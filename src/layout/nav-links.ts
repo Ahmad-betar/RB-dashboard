@@ -1,6 +1,5 @@
 import {
   House,
-  Settings,
   Archive,
   Building2,
   PackageSearch,
@@ -13,6 +12,7 @@ import {
   TvMinimal,
   ChartColumnBig,
   MessageCircleMore,
+  Images,
 } from "lucide-react";
 
 export const nav_links = [
@@ -80,5 +80,10 @@ export const nav_links = [
     logo: MessageCircleMore,
     label: "Messages",
     link: "/messages",
+  },
+  {
+    logo: Images,
+    label: "image size",
+    link: "/image-size",
   },
 ];

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import LoadingSpinner from "@/components/loading";
 import NoData from "@/components/no-data";
 import Title from "@/components/title";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import OfferTbale from "./offer-column";
 
 const OffersPage = () => {
-  const { watch, setValue } = useForm({
+  const { watch } = useForm({
     // defaultValues: { page: 1, limit: 10 },
   });
   const filters = watch();

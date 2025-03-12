@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes as ReactRoutes } from "react-router-dom";
 
 const Routes = () => {
+  const Home = lazy(() => import("@/pages/home/home"));
   const Customers = lazy(() => import("@/pages/customer/customer"));
   const Orders = lazy(() => import("@/pages/orders/orders"));
   const Order = lazy(() => import("@/pages/orders/order-datail"));
@@ -42,11 +43,12 @@ const Routes = () => {
   const Popular = lazy(() => import("@/pages/popular/popular"));
   const AddPopular = lazy(() => import("@/pages/popular/add-popular"));
   const Messages = lazy(() => import("@/pages/messages/messages"));
+  const ImageSize = lazy(() => import("@/pages/image-size/image-size"));
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <ReactRoutes>
-        <Route path="/" element={<>dsfsadf</>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/customer-cart">
           <Route index element={<CustomerCart />} />
@@ -81,6 +83,8 @@ const Routes = () => {
         <Route path="/popular" element={<Popular />} />
         <Route path="/add-popular" element={<AddPopular />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/image-size" element={<ImageSize />} />
+        <Route path="*" element={<></>} />
       </ReactRoutes>
     </Suspense>
   );

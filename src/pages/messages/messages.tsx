@@ -4,7 +4,7 @@ import RHFTextarea from "@/components/rhf-textarea";
 import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { addMessageMutation } from "@/whatsapp/whatsapp-query";
+import { addMessageMutation } from "@/pages/whatsapp/whatsapp-query";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface addMessage {
