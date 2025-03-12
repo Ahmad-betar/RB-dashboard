@@ -12,13 +12,6 @@ export interface getParentProductType {
 
 export interface addProductType {
   name: string;
-  parentProductTypeId: string | undefined;
-}
-
-export interface addProductTypeForm extends addProductType {
-  image: imageType[];
-}
-
-export interface addProductTypePayload extends addProductType {
   image: imageType;
+  parentProductTypeId: string | undefined;
 }

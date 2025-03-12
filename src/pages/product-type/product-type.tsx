@@ -25,7 +25,7 @@ const ProductType = () => {
 
   return (
     <div className="flex gap-8 flex-col justify-end">
-      <Title title="Product Type" />
+      <Title title="Category" />
 
       <Link
         to="/add-product-type"

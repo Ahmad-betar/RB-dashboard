@@ -1,6 +1,6 @@
 import { API_ROUTES } from "../api-routes";
 import { axiosInstance } from "../axios";
-import { addProductTypePayload, getParentProductType } from "./type";
+import { addProductType, getParentProductType } from "./type";
 
 // Get Parent Product Types
 export const get_parent_product_types = async () => {
@@ -19,7 +19,7 @@ export const get_children_product_types = async (parentId: string) => {
 };
 
 // Create Product Type
-export const create_product_type = async (params: addProductTypePayload) => {
+export const create_product_type = async (params: addProductType) => {
   const { data } = await axiosInstance.post(
     API_ROUTES.productType.create,
     params

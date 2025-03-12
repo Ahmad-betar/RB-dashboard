@@ -9,7 +9,7 @@ import OfferTbale from "./offer-column";
 
 const OffersPage = () => {
   const { watch, setValue } = useForm({
-    defaultValues: { page: 1, limit: 10 },
+    // defaultValues: { page: 1, limit: 10 },
   });
   const filters = watch();
 
@@ -39,7 +39,7 @@ const OffersPage = () => {
       )}
 
       {/* Pagination */}
-      <div className="flex justify-between items-center mt-6">
+      {/* <div className="flex justify-between items-center mt-6">
         <Button
           variant="outline"
           disabled={filters.page === 1}
@@ -57,7 +57,7 @@ const OffersPage = () => {
         >
           Next
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

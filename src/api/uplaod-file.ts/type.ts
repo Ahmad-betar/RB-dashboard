@@ -13,10 +13,10 @@ export interface videoType {
 
 export interface imageResponse {
   message: string;
-  images: imageType[];
+  image: imageType[];
 }
 
 export interface videoResponse {
   message: string;
-  videos: videoType[];
+  video: videoType[];
 }

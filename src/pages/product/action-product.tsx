@@ -1,7 +1,3 @@
-import {
-  getChildrenProductTypes,
-  getParentProductTypesQuery,
-} from "@/api/product-type/product-type-query";
 import { addProduct } from "@/api/products/type";
 import RHFIileInput from "@/components/rhf-file-input";
 import LoadingSpinner from "@/components/loading";
@@ -9,45 +5,39 @@ import RHFSelect from "@/components/rhf-select";
 import RHFTextarea from "@/components/rhf-textarea";
 import TextField from "@/components/TextField";
 import { Button } from "@/components/ui/button";
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import {
-  addProductsQuery,
-  editProductsQuery,
-  getOneProductsQuery,
-} from "@/api/products/products-query";
+import { FormProvider } from "react-hook-form";
 import Title from "@/components/title";
-// import MultiValueInput from "@/components/multi-value-input";
-import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import MultiTagInput from "@/components/rhf-multi-tag-input";
 import RHFCheckbox from "@/components/rhf-checkbox";
 import { X } from "lucide-react";
-import { imageType } from "@/api/uplaod-file.ts/type";
+import { useActionProduct } from "./action-product-hook";
 
 const ActionProduct = () => {
-  const { id } = useParams();
-  const methods = useForm<addProduct>({});
-  const { fields, append, remove } = useFieldArray({
-    control: methods.control,
-    name: "attributes",
-    // rules: { required: true },
-  });
-  const parentProductTypeValue = methods.watch("productTypeId");
+  const {
+    id,
+    methods,
+    fields,
+    append,
+    remove,
+    images,
+    addImage,
+    videos,
+    addVideo,
+    data,
+    isLoading,
+    parentProducType,
+    parentProductTypeLoading,
+    childrenProductType,
+    add,
+    isAdding,
+    edit,
+    isEditing,
+  } = useActionProduct();
 
-  const { data, isLoading } = getOneProductsQuery(id!);
-  const { data: parentProducType, isLoading: parentProductTypeLoading } =
-    getParentProductTypesQuery();
-
-  const { data: childrenProductType } = getChildrenProductTypes(
-    parentProductTypeValue
-  );
-
-  const { mutate: add, isPending: isAdding } = addProductsQuery();
-  const { mutate: edit, isPending: isEditing } = editProductsQuery();
-
-  const submitHandler = (data: any) => {
+  const submitHandler = (data: addProduct) => {
     var productTypeId = data.productTypeId;
 
     if (data.childrenProductTypeId) {
@@ -56,33 +46,25 @@ const ActionProduct = () => {
       delete data.childrenProductTypeId;
     }
 
-    delete data.productType;
-
-
     id
       ? edit({
           id,
           params: {
             ...data,
             productTypeId,
-            logo: (data.logo as imageType[])[0],
           },
         })
       : add({
           ...data,
           productTypeId,
-          logo: (data.logo as imageType[])[0],
         });
   };
 
   useEffect(() => {
-    const values = data?.data;
-
-    if (id && values) {
+    if (id && data?.data) {
       methods.reset({
-        ...values,
-        productTypeId: values.productType._id,
-        logo: [values.logo],
+        ...data.data,
+        productTypeId: data.data.productType._id,
       });
     }
   }, [data, id, methods]);
@@ -166,12 +148,6 @@ const ActionProduct = () => {
               label="Product Type"
             />
 
-            {/* <MultiValueInput
-          setValue={setValue}
-          value={value}
-          onChange={(newValue) => methods.setValue("availableSizes", newValue)}
-          label="Available Sizes"
-        /> */}
             <MultiTagInput
               type="number"
               control={methods.control}
@@ -180,27 +156,55 @@ const ActionProduct = () => {
             />
 
             <div className="">
-              <RHFIileInput name="logo" id="logo" type="image" label="Logo:" />
-            </div>
-
-            <div className="">
               <RHFIileInput
-                multiple
-                name="images"
-                id="images"
+                required
+                name="logo"
+                id="logo"
                 type="image"
-                label="Select Multiple Images:"
+                label="Logo:"
               />
             </div>
 
-            <div className="">
-              <RHFIileInput
-                multiple
-                name="videos"
-                id="videos"
-                type="video"
-                label="Select Multiple Videos:"
-              />
+            <div className="flex flex-col gap-2">
+              <Label>Select Multiple Images:</Label>
+
+              {images.map((_image, idx) => (
+                <RHFIileInput
+                  key={idx}
+                  name={`images.${idx}`}
+                  id={`images.${idx}`}
+                  type="image"
+                />
+              ))}
+              <Button
+                type="button"
+                variant={"outline"}
+                className="w-full"
+                onClick={() => addImage(undefined as any)}
+              >
+                Add Image
+              </Button>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label>Select Multiple Videos:</Label>
+
+              {videos.map((_image, idx) => (
+                <RHFIileInput
+                  key={idx}
+                  name={`videos.${idx}`}
+                  id={`videos.${idx}`}
+                  type="video"
+                />
+              ))}
+              <Button
+                type="button"
+                variant={"outline"}
+                className="w-full"
+                onClick={() => addVideo(undefined as any)}
+              >
+                Add Video
+              </Button>
             </div>
 
             <div className="flex flex-col gap-4 ">
@@ -254,7 +258,6 @@ const ActionProduct = () => {
                 Save
               </Button>
             </div>
-            {/* <DevTool control={methods.control} /> */}
           </form>
         </CardContent>
       </Card>

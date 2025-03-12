@@ -9,7 +9,6 @@ import {
   uploadVideoQuery,
 } from "@/api/uplaod-file.ts/uplaod-file";
 import LoadingSpinner from "./loading";
-import { imageType } from "@/api/uplaod-file.ts/type";
 
 interface RHFInputFileProps extends InputProps {
   name: string;
@@ -35,63 +34,47 @@ const RHFIileInput = ({
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData();
 
-    const newfiles = e.target.files;
+    const newfiles = e.target.files?.item(0);
     if (!newfiles) return;
 
-    for (var i = 0; i < newfiles.length; i++) {
-      formData.append(
-        type === "image" ? "images" : "videos",
-        newfiles.item(i)!
-      );
-    }
-
     if (type === "image") {
+      formData.append("image", newfiles);
+
       addImage(formData, {
         onSuccess: (data) => {
-          setValue(name, data.images);
+          setValue(name, data.image);
         },
       });
     } else {
+      formData.append("video", newfiles);
+
       addVideo(formData, {
         onSuccess: (data) => {
-          setValue(name, data.videos);
+          setValue(name, data.video);
         },
       });
     }
-  };
-
-  const removeFile = (index: number) => {
-    let newArr = file;
-    newArr.splice(index, 1);
-
-    setValue(name, newArr.length === 0 ? null : newArr);
   };
 
   if (file) {
     return (
-      <div
-        className={cn("flex flex-col w-full gap-4 justify-between md:w-fit")}
-      >
+      <div className={cn("flex flex-col w-full gap-4 justify-between")}>
         {label && <Label>{label}</Label>}
 
         <div className="flex gap-2 w-full">
-          {file &&
-            file.map((file: imageType, idx: number) => (
-              <Button
-                key={idx}
-                type="button"
-                variant={"outline"}
-                style={{
-                  backgroundImage: `url('${file.url}')`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  width: "100%",
-                }}
-                onClick={() => removeFile(idx)}
-              >
-                <X className="stroke-black" />
-              </Button>
-            ))}
+          <Button
+            type="button"
+            variant={"outline"}
+            style={{
+              backgroundImage: `url('${file.url}')`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "100%",
+            }}
+            onClick={() => setValue(name, undefined)}
+          >
+            <X className="stroke-red-500" />
+          </Button>
         </div>
       </div>
     );

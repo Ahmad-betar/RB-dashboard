@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { addOfferMutation } from "@/api/offer/offer-query";
-import { DevTool } from "@hookform/devtools";
 import RHFIileInput from "@/components/rhf-file-input";
 
 const AddOffer = () => {
@@ -119,7 +118,6 @@ const AddOffer = () => {
             </CardContent>
           </Card>
         </div>
-        <DevTool control={control} />
       </form>
     </FormProvider>
   );

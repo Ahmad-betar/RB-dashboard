@@ -106,8 +106,8 @@ const TempOrderPage = () => {
             {data?.order.products.map((product) => (
               <Card key={product._id}>
                 <CardContent className="p-4 space-y-2">
-                  <LabeledData label="Product" value={product.product.title} />
-                  <LabeledData label="Price" value={`$${product.price}`} />
+                  <LabeledData label="Product" value={product.product?.title} />
+                  <LabeledData label="Price" value={`${product.price}`} />
                   <LabeledData label="Size" value={product.size} />
                   <LabeledData label="Quantity" value={product.quantity} />
                   <LabeledData
@@ -115,7 +115,7 @@ const TempOrderPage = () => {
                     value={product.notes || "No notes provided."}
                   />
                   <div className="flex flex-wrap gap-2">
-                    {product.product.images.map((image, index) => (
+                    {product.product?.images.map((image, index) => (
                       <RhfDialog
                         key={index}
                         trigger={

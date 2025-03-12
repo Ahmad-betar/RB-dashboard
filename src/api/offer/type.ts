@@ -53,6 +53,7 @@ interface ProductItem {
 interface Data {
   _id: string;
   description: string;
+  image: imageType;
   products: ProductItem[];
   expirationDate: string;
   numberOfProductsHaveToBuy: number;

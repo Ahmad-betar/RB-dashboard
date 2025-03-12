@@ -50,6 +50,7 @@ export interface addProduct {
   price: number;
   notes: string;
   productTypeId: string;
+  childrenProductTypeId?: string;
   availableSizes: string[];
   logo: imageType | imageType[];
   images: imageType[];

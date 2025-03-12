@@ -5,16 +5,15 @@ import {
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import RHFSelect from "@/components/rhf-select";
-import { addProductTypeForm } from "@/api/product-type/type";
+import { addProductType } from "@/api/product-type/type";
 import Title from "@/components/title";
 import { Card, CardContent } from "@/components/ui/card";
 import TextField from "@/components/TextField";
-// import RHFIileInput from "@/components/rhf-file-input";
 import { Button } from "@/components/ui/button";
 import RHFIileInput from "@/components/rhf-file-input";
 
 const AddProductType = () => {
-  const methods = useForm<addProductTypeForm>({});
+  const methods = useForm<addProductType>({});
   const { control, handleSubmit, reset } = methods;
   const { mutate, isPending } = createProductType();
   const { data } = getParentProductTypesQuery();
@@ -24,19 +23,16 @@ const AddProductType = () => {
     value: _id,
   }));
 
-  const onSubmit = (data: addProductTypeForm) => {
-    mutate(
-      { ...data, image: data.image[0] },
-      {
-        onError: (data: any) => {
-          toast(data.response.data.result);
-        },
-        onSuccess: () => {
-          reset();
-          toast("Product Type added successfully");
-        },
-      }
-    );
+  const onSubmit = (data: addProductType) => {
+    mutate(data, {
+      onError: (data: any) => {
+        toast(data.response.data.result);
+      },
+      onSuccess: () => {
+        reset();
+        toast("Product Type added successfully");
+      },
+    });
   };
 
   return (

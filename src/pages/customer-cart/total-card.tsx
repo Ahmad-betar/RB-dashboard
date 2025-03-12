@@ -12,7 +12,7 @@ const CartTotal = ({ totalPrice }: CartTotalProps) => {
       </CardHeader>
       <CardContent>
         <p className="text-lg font-semibold">
-          Total Price: <span className="text-primary">${totalPrice}</span>
+          Total Price: <span className="text-primary">{totalPrice}</span>
         </p>
       </CardContent>
     </Card>
