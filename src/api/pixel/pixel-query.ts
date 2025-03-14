@@ -1,6 +1,7 @@
 // queries.ts
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { addPixel, getPixel } from "./pixel-api";
+import { toast } from "sonner";
 
 // Get Pixel Query
 export const usePixelQuery = () => {
@@ -13,11 +14,16 @@ export const usePixelQuery = () => {
 // Add Pixel Mutation
 export const useAddPixelMutation = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: addPixel,
     onSuccess: () => {
       // Invalidate the pixel query to refetch data
       queryClient.invalidateQueries({ queryKey: ["pixel"] });
+      toast("Edited");
+    },
+    onError: () => {
+      toast("Error");
     },
   });
 };

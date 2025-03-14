@@ -45,7 +45,7 @@ const OfferDetails = () => {
             </CardHeader>
             <CardContent className="p-4">
               <h3 className="text-lg font-semibold">{product.title}</h3>
-              <p className="text-sm text-gray-600">{product.description}</p>
+              {/* <p className="text-sm text-gray-600">{product.description}</p> */}
 
               {/* Price and Discount */}
               <div className="flex items-center gap-2 mt-2">
