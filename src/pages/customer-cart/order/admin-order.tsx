@@ -1,7 +1,8 @@
 import { getCustomersQuery } from "@/api/customer/customer-query";
 import { createTempOrderMutation } from "@/api/cutomer-cart/order/temp-orders-query";
 import RHFCheckbox from "@/components/rhf-checkbox";
-import RHFSelect from "@/components/rhf-select";
+import { RHFCombobox } from "@/components/rhf-combobox";
+// import RHFSelect from "@/components/rhf-select";
 import RHFTextarea from "@/components/rhf-textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,13 +28,20 @@ const AdminOrder = () => {
       <div className="flex flex-col gap-4">
         <Card className="w-full md:w-1/2 mx-auto">
           <CardContent className="flex  flex-col gap-2">
-            <RHFSelect
+            {/* <RHFSelect
               required
               name="customerPhone"
               control={control}
               label="Phone Number"
               placeholder="Set Customer Number"
               items={customers ?? []}
+            /> */}
+            <RHFCombobox
+              required
+              name="customerPhone"
+              control={control}
+              label="Phone Number"
+              data={customers ?? []}
             />
 
             <RHFTextarea

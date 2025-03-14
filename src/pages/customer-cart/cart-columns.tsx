@@ -54,7 +54,6 @@ export const cartColumns: ColumnDef<CartItem>[] = [
   {
     accessorKey: "price",
     header: "Price",
-    cell: ({ row }) => `$${row.original.price}`,
   },
   {
     accessorKey: "size",

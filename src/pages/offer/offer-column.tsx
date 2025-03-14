@@ -31,8 +31,13 @@ const OfferTbale = ({ offers }: { offers: Offer[] }) => {
       header: "image",
       cell: ({ row }) => (
         <RhfDialog
-          content={<img className={row.original.image?.url} />}
-          trigger={<img className={row.original.image?.url} />}
+          content={<img src={row.original.image?.url} />}
+          trigger={
+            <img
+              src={row.original.image?.url}
+              className="h-full object-cover"
+            />
+          }
         />
       ),
     },

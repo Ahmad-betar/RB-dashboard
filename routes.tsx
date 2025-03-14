@@ -44,11 +44,13 @@ const Routes = () => {
   const AddPopular = lazy(() => import("@/pages/popular/add-popular"));
   const Messages = lazy(() => import("@/pages/messages/messages"));
   const ImageSize = lazy(() => import("@/pages/image-size/image-size"));
+  const Pixel = lazy(() => import("@/pages/pixel/pixel"));
+  const OfferTemplate = lazy(() => import("@/pages/offers-template/offers-template"));
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <ReactRoutes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/customer-cart">
           <Route index element={<CustomerCart />} />
@@ -84,6 +86,9 @@ const Routes = () => {
         <Route path="/add-popular" element={<AddPopular />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/image-size" element={<ImageSize />} />
+        <Route path="/image-size" element={<ImageSize />} />
+        <Route path="/pixel" element={<Pixel />} />
+        <Route path="/offers-template" element={<OfferTemplate />} />
         <Route path="*" element={<></>} />
       </ReactRoutes>
     </Suspense>

@@ -1,11 +1,12 @@
-import { getCustomersQuery } from "@/api/customer/customer-query";
-import RHFMultiSelectForm from "@/components/rhf-multi-select";
-import RHFTextarea from "@/components/rhf-textarea";
 import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { addMessageMutation } from "@/pages/whatsapp/whatsapp-query";
+import { addMessageMutation } from "@/api/whatsapp/whatsapp-query";
 import { FormProvider, useForm } from "react-hook-form";
+import { useOffersTemplatesQuery } from "@/api/offers-template/offers-template-query";
+import RHFSelect from "@/components/rhf-select";
+import TextField from "@/components/TextField";
+import MultiTagInput from "@/components/rhf-multi-tag-input";
 
 interface addMessage {
   customerIds: string[];
@@ -14,40 +15,53 @@ interface addMessage {
 
 const Messages = () => {
   const methods = useForm<addMessage>();
-  const { control, handleSubmit } = methods;
+  const { data, isLoading } = useOffersTemplatesQuery();
+  const { mutate, isPending, reset } = addMessageMutation();
 
-  const { data } = getCustomersQuery();
-  const { mutate } = addMessageMutation();
+  const { control, handleSubmit } = methods;
 
   const onSubmit = (data: addMessage) => {
     mutate(data, {
       onSuccess: () => {
-        methods.reset();
+        reset();
       },
     });
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <Title title="Add Messages" />
 
         <Card>
           <CardContent className="flex flex-col gap-4">
-            <RHFMultiSelectForm
-              name="customerIds"
-              label="Customers"
-              options={
-                data?.customers.map(({ id, name, phone }) => ({
-                  label: name + " " + phone,
-                  value: id,
+            <RHFSelect
+              disabled={isLoading}
+              control={control}
+              name="offersTemplateId"
+              label="Offers Template"
+              placeholder="Offers Template"
+              items={
+                data?.data.map(({ name, _id }) => ({
+                  label: name,
+                  value: _id,
                 })) ?? []
               }
             />
 
-            <RHFTextarea name="message" control={control} label="message" />
+            <MultiTagInput
+              control={control}
+              name="variables"
+              label="variables"
+            />
 
-            <Button>Add Message</Button>
+            <TextField
+              name="urlVariable"
+              control={control}
+              label="URL Variable"
+              placeholder="URL Variable"
+            />
+            <Button disabled={isPending}>Send Message</Button>
           </CardContent>
         </Card>
       </form>

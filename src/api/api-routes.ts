@@ -104,11 +104,23 @@ export const API_ROUTES = {
     add: "admin/sizesImage",
   },
 
+  pixel: {
+    add: "admin/pixel",
+    get: "pixel",
+  },
+
   satistics: {
     productsStatistics: "admin/productsSatistics",
     customersStatistics: "admin/customersSatistics",
     salesStatistics: "admin/salesSatistics",
     dailyRevenueStatistics: "admin/dailyRevenueSatistics",
     offerStatistics: "admin/offerSatistics",
+  },
+
+
+  offersTemplate: {
+    get: "admin/offersTemplates",
+    add: "admin/offersTemplate",
+    delete: "admin/offersTemplate/", //param
   },
 };

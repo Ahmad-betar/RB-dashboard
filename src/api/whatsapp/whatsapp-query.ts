@@ -8,8 +8,8 @@ export const addMessageMutation = () => {
     onSuccess: () => {
       toast("message added successfully");
     },
-    onError: () => {
-      toast("message error");
+    onError: (data: any) => {
+      toast(data.response.data.message);
     },
   });
 };

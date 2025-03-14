@@ -13,6 +13,8 @@ import {
   ChartColumnBig,
   MessageCircleMore,
   Images,
+  Code,
+  LayoutTemplate,
 } from "lucide-react";
 
 export const nav_links = [
@@ -86,4 +88,15 @@ export const nav_links = [
     label: "image size",
     link: "/image-size",
   },
+  {
+    logo: Code,
+    label: "Pixel",
+    link: "/pixel",
+  },
+  {
+    logo: LayoutTemplate,
+    label: "Offers Template",
+    link: "/offers-template",
+  },
 ];
+
