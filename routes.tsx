@@ -45,51 +45,71 @@ const Routes = () => {
   const Messages = lazy(() => import("@/pages/messages/messages"));
   const ImageSize = lazy(() => import("@/pages/image-size/image-size"));
   const Pixel = lazy(() => import("@/pages/pixel/pixel"));
-  const OfferTemplate = lazy(() => import("@/pages/offers-template/offers-template"));
+  const OfferTemplate = lazy(
+    () => import("@/pages/offers-template/offers-template")
+  );
+
+  const Signin = lazy(() => import("@/pages/auth/sign-in"));
+  const PasswordReset = lazy(() => import("@/pages/auth/reset-password"));
+  const Admin = lazy(() => import("@/pages/auth/admin"));
+  const RequestPasswordReset = lazy(
+    () => import("@/pages/auth/request-password-reset")
+  );
+
+  const ProtectedPage = lazy(() => import("@/layout/protected-page"));
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <ReactRoutes>
-        <Route path="/" element={<Home />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/customer-cart">
-          <Route index element={<CustomerCart />} />
-          <Route path="temp-orders">
-            <Route index element={<TempOrders />} />
-            <Route path=":id" element={<TempOrder />} />
+        <Route path="/sign-in" element={<Signin />} />
+        <Route
+          path="/request-reset-password"
+          element={<RequestPasswordReset />}
+        />
+        <Route path="/reset-password" element={<PasswordReset />} />
+        <Route element={<ProtectedPage />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/customer-cart">
+            <Route index element={<CustomerCart />} />
+            <Route path="temp-orders">
+              <Route index element={<TempOrders />} />
+              <Route path=":id" element={<TempOrder />} />
+            </Route>
           </Route>
+          <Route path="/add-cart" element={<AddCart />} />
+          <Route path="/operators" element={<Operator />} />
+          <Route path="/add-operator" element={<AddOperator />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<Order />} />
+          <Route path="/admin-order" element={<AdminOrder />} />
+          <Route path="/state" element={<State />} />
+          <Route path="/state/:id" element={<Governorate />} />
+          <Route path="/state/:id/:GovernorateId" element={<City />} />
+          <Route path="/coupon" element={<Coupon />} />
+          <Route path="/add-coupon" element={<AddCoupon />} />
+          <Route path="/products" element={<Product />} />
+          <Route path="/action-product" element={<ActionProduct />} />
+          <Route path="/action-product/:id" element={<ActionProduct />} />
+          <Route path="/product-type" element={<ProductType />} />
+          <Route path="/add-product-type" element={<AddProductType />} />
+          <Route path="/product-type/:id" element={<ChildrenProductType />} />
+          <Route path="/offer" element={<Offer />} />
+          <Route path="/offer/:id" element={<EditOffer />} />
+          <Route path="/offer/view/:id" element={<ViewOffer />} />
+          <Route path="/add-offer" element={<AddOffer />} />
+          <Route path="offer/edit-product/:id" element={<EditOfferProduct />} />
+          <Route path="/banner" index element={<Banner />} />
+          <Route path="/popular" element={<Popular />} />
+          <Route path="/add-popular" element={<AddPopular />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/image-size" element={<ImageSize />} />
+          <Route path="/image-size" element={<ImageSize />} />
+          <Route path="/pixel" element={<Pixel />} />
+          <Route path="/offers-template" element={<OfferTemplate />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="*" element={<></>} />
         </Route>
-        <Route path="/add-cart" element={<AddCart />} />
-        <Route path="/operators" element={<Operator />} />
-        <Route path="/add-operator" element={<AddOperator />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/orders/:id" element={<Order />} />
-        <Route path="/admin-order" element={<AdminOrder />} />
-        <Route path="/state" element={<State />} />
-        <Route path="/state/:id" element={<Governorate />} />
-        <Route path="/state/:id/:GovernorateId" element={<City />} />
-        <Route path="/coupon" element={<Coupon />} />
-        <Route path="/add-coupon" element={<AddCoupon />} />
-        <Route path="/products" element={<Product />} />
-        <Route path="/action-product" element={<ActionProduct />} />
-        <Route path="/action-product/:id" element={<ActionProduct />} />
-        <Route path="/product-type" element={<ProductType />} />
-        <Route path="/add-product-type" element={<AddProductType />} />
-        <Route path="/product-type/:id" element={<ChildrenProductType />} />
-        <Route path="/offer" element={<Offer />} />
-        <Route path="/offer/:id" element={<EditOffer />} />
-        <Route path="/offer/view/:id" element={<ViewOffer />} />
-        <Route path="/add-offer" element={<AddOffer />} />
-        <Route path="offer/edit-product/:id" element={<EditOfferProduct />} />
-        <Route path="/banner" index element={<Banner />} />
-        <Route path="/popular" element={<Popular />} />
-        <Route path="/add-popular" element={<AddPopular />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/image-size" element={<ImageSize />} />
-        <Route path="/image-size" element={<ImageSize />} />
-        <Route path="/pixel" element={<Pixel />} />
-        <Route path="/offers-template" element={<OfferTemplate />} />
-        <Route path="*" element={<></>} />
       </ReactRoutes>
     </Suspense>
   );

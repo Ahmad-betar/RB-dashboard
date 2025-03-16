@@ -1,4 +1,11 @@
 export const API_ROUTES = {
+  auth: {
+    login: "admin/login",
+    add: "admin/admin",
+    requestPasswordReset: "admin/requestPasswordReset",
+    resetPassword: "admin/resetPassword",
+  },
+
   product: {
     get: "products",
     create: "admin/product",
@@ -116,7 +123,6 @@ export const API_ROUTES = {
     dailyRevenueStatistics: "admin/dailyRevenueSatistics",
     offerStatistics: "admin/offerSatistics",
   },
-
 
   offersTemplate: {
     get: "admin/offersTemplates",

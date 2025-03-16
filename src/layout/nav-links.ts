@@ -15,6 +15,7 @@ import {
   Images,
   Code,
   LayoutTemplate,
+  Shield,
 } from "lucide-react";
 
 export const nav_links = [
@@ -98,5 +99,9 @@ export const nav_links = [
     label: "Offers Template",
     link: "/offers-template",
   },
+  {
+    logo: Shield,
+    label: "Administrator",
+    link: "/admin",
+  },
 ];
-

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { nav_links } from "./nav-links";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logout from "@/assets/log-out.svg";
 import main from "@/assets/logo.svg";
 import {
@@ -13,6 +13,7 @@ import {
 import { Menu } from "lucide-react";
 
 const SideNav = () => {
+  const navigate = useNavigate();
   return (
     <Drawer direction="left">
       <DrawerTrigger className="w-fit p-2 rounded-full shadow-none h-10">
@@ -50,6 +51,10 @@ const SideNav = () => {
           <Button
             className="w-full flex justify-start gap-4 p-2"
             colorScheme="error"
+            onClick={() => {
+              localStorage.clear();
+              navigate("/sign-in");
+            }}
           >
             <img src={logout} alt="" />
             {"Logout"}
