@@ -11,9 +11,7 @@ export const axiosInstance = axsio.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  // config.headers.Authorization = "Bearer " + localStorage.getItem("token");
-  config.headers.Authorization =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11aGFtbWFkay5oMS4xLjIwMDFAZ21haWwuY29tIiwidXNlcklkIjoiNjdjMzYwOGIwN2Q5NjVjNjUzNDMyY2RlIiwiaWF0IjoxNzQwODczMTQ0LCJleHAiOjE3NDM0NjUxNDR9.h_ItAiOIMbM_8QlDJsopI2VAd4m7CVzo8DSs4HsboIE";
+  config.headers.Authorization = localStorage.getItem("token");
 
   return config;
 });

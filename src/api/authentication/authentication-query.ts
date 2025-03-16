@@ -27,8 +27,6 @@ export const loginQuery = () => {
 };
 
 export const addAdminQuery = () => {
-  const navigate = useNavigate();
-
   return useMutation({
     mutationKey: ["add-admin"],
     mutationFn: add_admin,
